@@ -39,7 +39,7 @@ public class WoordenController implements Initializable {
                                                 "Hoedje van papier\n" +
                                                 "\n" +
                                                 "En als het hoedje dan niet past\n" +
-                                                "Zetten we 't in de glazenkas\n" +
+                                                "Zetten we 't in de glazenkast\n" +
                                                 "Een, twee, drie, vier\n" +
                                                 "Hoedje van papier";
     
