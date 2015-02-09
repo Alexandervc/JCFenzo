@@ -77,7 +77,7 @@ public class WoordenController implements Initializable {
     }
 
     @FXML
-    private void concordatieAction(ActionEvent event) {
+    private void concordantieAction(ActionEvent event) {
          throw new UnsupportedOperationException("Not supported yet."); 
     }
    
