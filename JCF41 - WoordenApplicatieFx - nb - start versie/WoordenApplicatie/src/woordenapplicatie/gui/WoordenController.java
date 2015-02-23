@@ -57,28 +57,46 @@ public class WoordenController implements Initializable {
     private TextArea taOutput;
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)
+    {
         taInput.setText(DEFAULT_TEXT);
     }
     
     @FXML
-    private void aantalAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+    private void aantalAction(ActionEvent event)
+    {
+        //Totaal aantal woorden + aantal unieke woorden
+        String text = taInput.getText();
+        
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @FXML
-    private void sorteerAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+    private void sorteerAction(ActionEvent event)
+    {
+        //Unieke woorden omgekeerd alfabetisch ordenen
+        //Klasse Collections
+        String text = taInput.getText();
+        
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @FXML
-    private void frequentieAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+    private void frequentieAction(ActionEvent event)
+    {
+        //Aantal keer voorkomen van woord + ordenen op aantal
+        String text = taInput.getText();
+        
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @FXML
-    private void concordatieAction(ActionEvent event) {
-         throw new UnsupportedOperationException("Not supported yet."); 
+    private void concordatieAction(ActionEvent event)
+    {
+        //Op welke regel elk woord voorkomt + alfabetisch
+        String text = taInput.getText();
+        
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
    
 }
