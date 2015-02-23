@@ -7,7 +7,7 @@ package woordenapplicatie.gui;
  */
 
 
-
+import java.util.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -65,38 +65,79 @@ public class WoordenController implements Initializable {
     @FXML
     private void aantalAction(ActionEvent event)
     {
-        //Totaal aantal woorden + aantal unieke woorden
-        String text = taInput.getText();
+        String text = taInput.getText();        
+        text = text.replaceAll(",", " ");
+        text = text.replaceAll("\\.", " ");
+        text = text.replaceAll("\n", " ");
+        text = text.replaceAll("\\s+", " ");
+        text = text.toLowerCase();        
+        String[] words = text.split(" ");
         
-        throw new UnsupportedOperationException("Not supported yet."); 
+        //HashSet add: O(1), size: O(1), geen dubbele waardes
+        HashSet<String> hashset = new HashSet<>();
+        
+        for (String s : words)
+        {
+            if (!s.isEmpty())
+            {
+                hashset.add(s);
+            }
+        }
+        
+        taOutput.setText("Totaal aantal woorden: " + words.length + "\n" 
+                + "Aantal verschillende woorden: " + hashset.size());
     }
 
     @FXML
     private void sorteerAction(ActionEvent event)
     {
+        //SET
         //Unieke woorden omgekeerd alfabetisch ordenen
         //Klasse Collections
-        String text = taInput.getText();
+        String text = taInput.getText();          
+        text = text.replaceAll(",", " ");
+        text = text.replaceAll("\\.", " ");
+        text = text.replaceAll("\n", " ");
+        text = text.replaceAll("\\s+", " ");
+        text = text.toLowerCase();        
+        String[] words = text.split(" ");
         
-        throw new UnsupportedOperationException("Not supported yet."); 
+        //TreeSet add: geen dubbele waardes, gesorteerd: O(N)
+        TreeSet<String> treeset = new TreeSet();        
+        
+        for (String s : words)
+        {
+            if (!s.isEmpty())
+            {
+                treeset.add(s);
+            }
+        }    
+        
+        taOutput.setText(treeset.descendingSet().toString());
     }
 
     @FXML
     private void frequentieAction(ActionEvent event)
     {
         //Aantal keer voorkomen van woord + ordenen op aantal
+        
+        //unieke waardes
+        //aantal ophogen; get(key = woord) + (value = aantal)
+        //sorteren value (comparable)
         String text = taInput.getText();
         
-        throw new UnsupportedOperationException("Not supported yet."); 
+        //HashMap get: O(1)
     }
 
     @FXML
     private void concordantieAction(ActionEvent event)
     {
         //Op welke regel elk woord voorkomt + alfabetisch
+        
+        //tekst splitten
+        //voor elk woord 
         String text = taInput.getText();
         
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
-   
+        //TreeMap ..
+    }   
 }
