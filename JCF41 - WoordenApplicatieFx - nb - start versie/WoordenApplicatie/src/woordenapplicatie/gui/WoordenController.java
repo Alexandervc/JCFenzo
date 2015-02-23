@@ -91,7 +91,7 @@ public class WoordenController implements Initializable {
     }
 
     @FXML
-    private void concordatieAction(ActionEvent event)
+    private void concordantieAction(ActionEvent event)
     {
         //Op welke regel elk woord voorkomt + alfabetisch
         String text = taInput.getText();
