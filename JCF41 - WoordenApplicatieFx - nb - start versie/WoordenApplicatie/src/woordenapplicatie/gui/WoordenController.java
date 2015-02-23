@@ -132,12 +132,62 @@ public class WoordenController implements Initializable {
     @FXML
     private void concordantieAction(ActionEvent event)
     {
-        //Op welke regel elk woord voorkomt + alfabetisch
+        String text = taInput.getText();        
+        text = text.replaceAll(",", " ");
+        text = text.replaceAll("\\.", " ");
+        text = text.replaceAll("\n+", "\n");
+        text = text.toLowerCase();        
         
-        //tekst splitten
-        //voor elk woord 
-        String text = taInput.getText();
+        String[] lineStrings = text.split("\n");
+        // Array lines van HashSet words, want daarop vooral Add en Contains aanroepen en die hebben O(1)
+        HashSet[] lines = new HashSet[lineStrings.length];
+        // HashSet van alle unieke woorden, want geen dubbelen en vooral Add aanroepen en die heeft O(1)
+        HashSet<String> uniqueWords = new HashSet<>();
         
-        //TreeMap ..
+        
+        for(int i = 0; i < lineStrings.length; i++) 
+        {
+            lineStrings[i] = lineStrings[i].replaceAll("\\s+", " ");
+            String[] wordStrings = lineStrings[i].split(" ");
+            HashSet<String> words = new HashSet<>();
+            for(String w : wordStrings) 
+            {
+                uniqueWords.add(w);
+                words.add(w);
+            }
+            lines[i] = words;
+        }
+        
+        Iterator<String> itUniqueWords = uniqueWords.iterator();
+        
+        // TreeMap, want je hebt Key-Value paren nodig en dan is het meteen op alfabetische volgorde, maar containsKey duurt wss wel langer?
+        // en get en put zijn O(log n) en die worden wel vaak aangeroepen, dus miss toch HashMap, maar ivm met alfabet??
+        // met als value HashSet omdat de Add O(1) heeft
+        TreeMap<String, HashSet<Integer>> treemap = new TreeMap<>();
+        
+        // door alle items in uniqueWords loopen en dan per line kijken of die hem bevat,
+        while(itUniqueWords.hasNext()) 
+        {
+            String word = itUniqueWords.next();
+            for(int i = 0; i < lines.length; i++) 
+            {
+                if(lines[i].contains(word)) 
+                {
+                    // zo ja voeg toe aan TreeMap
+                    if(treemap.containsKey(word)) 
+                    {
+                        treemap.get(word).add(i + 1);
+                    }
+                    else
+                    {
+                        HashSet<Integer> references = new HashSet<> ();
+                        references.add(i + 1);
+                        treemap.put(word, references);
+                    }
+                }
+            }
+        }
+        
+        taOutput.setText(treemap.toString());
     }   
 }
