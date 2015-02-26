@@ -113,7 +113,14 @@ public class WoordenController implements Initializable {
             }
         }    
         
-        taOutput.setText(treeset.descendingSet().toString());
+        String output = "";
+        
+        for (String s : treeset.descendingSet())
+        {
+            output += s + "\n";
+        }
+        
+        taOutput.setText(output);
     }
 
     @FXML
@@ -124,9 +131,50 @@ public class WoordenController implements Initializable {
         //unieke waardes
         //aantal ophogen; get(key = woord) + (value = aantal)
         //sorteren value (comparable)
-        String text = taInput.getText();
+        String text = taInput.getText();        
+        text = text.replaceAll(",", " ");
+        text = text.replaceAll("\\.", " ");
+        text = text.replaceAll("\n", " ");
+        text = text.replaceAll("\\s+", " ");
+        text = text.toLowerCase();        
+        String[] words = text.split(" ");
         
-        //HashMap get: O(1)
+        //HashMap get: O(1), put: O(1)
+        HashMap<String, Integer> hashmap = new HashMap<>();
+        
+        for (String s : words)
+        {
+            Integer i = hashmap.get(s);
+            
+            if (i != null)
+            {
+                i += 1;
+                hashmap.put(s, i);
+            }
+            else
+            {
+                hashmap.put(s, 1);
+            }
+        }
+        
+        SortedSet<Map.Entry<String, Integer>> sortedmap = new TreeSet<Map.Entry<String, Integer>>(
+            new Comparator<Map.Entry<String, Integer>>()
+            {
+                @Override
+                public int compare(Map.Entry<String, Integer> t, Map.Entry<String, Integer> t1) {
+                    if (t.getValue().equals(t1.getValue()))
+                    {
+                        return t.getKey().compareTo(t1.getKey());
+                    }
+
+                    return t.getValue().compareTo(t1.getValue());
+                }
+            }
+        );
+        
+        sortedmap.addAll(hashmap.entrySet());
+        
+        taOutput.setText(sortedmap.toString());
     }
 
     @FXML
@@ -142,8 +190,7 @@ public class WoordenController implements Initializable {
         // Array lines van HashSet words, want daarop vooral Add en Contains aanroepen en die hebben O(1)
         HashSet[] lines = new HashSet[lineStrings.length];
         // HashSet van alle unieke woorden, want geen dubbelen en vooral Add aanroepen en die heeft O(1)
-        HashSet<String> uniqueWords = new HashSet<>();
-        
+        HashSet<String> uniqueWords = new HashSet<>();        
         
         for(int i = 0; i < lineStrings.length; i++) 
         {
@@ -188,6 +235,13 @@ public class WoordenController implements Initializable {
             }
         }
         
-        taOutput.setText(treemap.toString());
+        /*String output = "";
+        
+        for (String s : treemap)
+        {
+            output += s + "\n";
+        }
+        
+        taOutput.setText(output);*/
     }   
 }
