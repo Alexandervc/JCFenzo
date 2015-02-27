@@ -209,8 +209,9 @@ public class WoordenController implements Initializable {
         
         // TreeMap, want je hebt Key-Value paren nodig en dan is het meteen op alfabetische volgorde, maar containsKey duurt wss wel langer?
         // en get en put zijn O(log n) en die worden wel vaak aangeroepen, dus miss toch HashMap, maar ivm met alfabet??
-        // met als value HashSet omdat de Add O(1) heeft
-        TreeMap<String, HashSet<Integer>> treemap = new TreeMap<>();
+        // met als value TreeSet omdat de Add O(log n) heeft, dus dit duurt wel langer dan bij een HashSet
+        // maar dan is het ook meteen gesorteerd en de gesorteerde waarden ophalen gaat dan veel sneller
+        TreeMap<String, TreeSet<Integer>> treemap = new TreeMap<>();
         
         // door alle items in uniqueWords loopen en dan per line kijken of die hem bevat,
         while(itUniqueWords.hasNext()) 
@@ -227,7 +228,7 @@ public class WoordenController implements Initializable {
                     }
                     else
                     {
-                        HashSet<Integer> references = new HashSet<> ();
+                        TreeSet<Integer> references = new TreeSet<> ();
                         references.add(i + 1);
                         treemap.put(word, references);
                     }
@@ -237,13 +238,14 @@ public class WoordenController implements Initializable {
         
         String output = "";
         
-        for (Map.Entry<String, HashSet<Integer>> me : treemap.entrySet())
+        for (Map.Entry<String, TreeSet<Integer>> me : treemap.entrySet())
         {
             output += me.getKey() + " [";
             for(Integer i : me.getValue()) 
             {
                 output += i + ", ";
             }
+            output = output.substring(0, output.length() - 2);
             output += "] \n";
         }
         
