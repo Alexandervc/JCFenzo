@@ -174,7 +174,14 @@ public class WoordenController implements Initializable {
         
         sortedmap.addAll(hashmap.entrySet());
         
-        taOutput.setText(sortedmap.toString());
+        String output = "";
+        
+        for (Map.Entry<String, Integer> m : sortedmap)
+        {
+            output += m.getKey() + ": " + m.getValue() + "\n";
+        }
+        
+        taOutput.setText(output);
     }
 
     @FXML
