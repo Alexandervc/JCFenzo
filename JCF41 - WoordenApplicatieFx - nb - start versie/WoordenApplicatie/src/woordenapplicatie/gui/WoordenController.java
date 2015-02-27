@@ -242,13 +242,18 @@ public class WoordenController implements Initializable {
             }
         }
         
-        /*String output = "";
+        String output = "";
         
-        for (String s : treemap)
+        for (Map.Entry<String, HashSet<Integer>> me : treemap.entrySet())
         {
-            output += s + "\n";
+            output += me.getKey() + " [";
+            for(Integer i : me.getValue()) 
+            {
+                output += i + ", ";
+            }
+            output += "] \n";
         }
         
-        taOutput.setText(output);*/
+        taOutput.setText(output);
     }   
 }
