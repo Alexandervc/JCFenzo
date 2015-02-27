@@ -91,9 +91,6 @@ public class WoordenController implements Initializable {
     @FXML
     private void sorteerAction(ActionEvent event)
     {
-        //SET
-        //Unieke woorden omgekeerd alfabetisch ordenen
-        //Klasse Collections
         String text = taInput.getText();          
         text = text.replaceAll(",", " ");
         text = text.replaceAll("\\.", " ");
@@ -125,12 +122,7 @@ public class WoordenController implements Initializable {
 
     @FXML
     private void frequentieAction(ActionEvent event)
-    {
-        //Aantal keer voorkomen van woord + ordenen op aantal
-        
-        //unieke waardes
-        //aantal ophogen; get(key = woord) + (value = aantal)
-        //sorteren value (comparable)
+    {        
         String text = taInput.getText();        
         text = text.replaceAll(",", " ");
         text = text.replaceAll("\\.", " ");
@@ -157,6 +149,7 @@ public class WoordenController implements Initializable {
             }
         }
         
+        //Treeset addAll: O(n log n)
         SortedSet<Map.Entry<String, Integer>> sortedmap = new TreeSet<Map.Entry<String, Integer>>(
             new Comparator<Map.Entry<String, Integer>>()
             {
