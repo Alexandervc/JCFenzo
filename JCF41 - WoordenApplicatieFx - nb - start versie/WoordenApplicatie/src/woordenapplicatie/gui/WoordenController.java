@@ -99,7 +99,7 @@ public class WoordenController implements Initializable {
         text = text.toLowerCase();        
         String[] words = text.split(" ");
         
-        //TreeSet add: geen dubbele waardes, gesorteerd: O(N)
+        //TreeSet add: geen dubbele waardes, gesorteerd: O(log n)
         TreeSet<String> treeset = new TreeSet();        
         
         for (String s : words)
@@ -150,7 +150,7 @@ public class WoordenController implements Initializable {
         }
         
         //Treeset addAll: O(n log n)
-        SortedSet<Map.Entry<String, Integer>> sortedmap = new TreeSet<Map.Entry<String, Integer>>(
+        TreeSet<Map.Entry<String, Integer>> sortedmap = new TreeSet<>(
             new Comparator<Map.Entry<String, Integer>>()
             {
                 @Override
@@ -187,15 +187,19 @@ public class WoordenController implements Initializable {
         text = text.toLowerCase();        
         
         String[] lineStrings = text.split("\n");
-        // Array lines van HashSet words, want daarop vooral Add en Contains aanroepen en die hebben O(1)
+        
+        // HashSet[] add: O(1), contains: O(1)
         HashSet[] lines = new HashSet[lineStrings.length];
-        // HashSet van alle unieke woorden, want geen dubbelen en vooral Add aanroepen en die heeft O(1)
+        
+        // HashSet geen dubbele waardes, add: O(1)
         HashSet<String> uniqueWords = new HashSet<>();        
         
         for(int i = 0; i < lineStrings.length; i++) 
         {
             lineStrings[i] = lineStrings[i].replaceAll("\\s+", " ");
             String[] wordStrings = lineStrings[i].split(" ");
+            
+            // HashSet add: O(1)
             HashSet<String> words = new HashSet<>();
             for(String w : wordStrings) 
             {
@@ -207,13 +211,11 @@ public class WoordenController implements Initializable {
         
         Iterator<String> itUniqueWords = uniqueWords.iterator();
         
-        // TreeMap, want je hebt Key-Value paren nodig en dan is het meteen op alfabetische volgorde, maar containsKey duurt wss wel langer?
-        // en get en put zijn O(log n) en die worden wel vaak aangeroepen, dus miss toch HashMap, maar ivm met alfabet??
-        // met als value TreeSet omdat de Add O(log n) heeft, dus dit duurt wel langer dan bij een HashSet
-        // maar dan is het ook meteen gesorteerd en de gesorteerde waarden ophalen gaat dan veel sneller
+        // TreeMap key-value paren, gesorteerd, get: O(log n), put: O(log n)
+        // TreeSet gesorteerd, add: O(log n)
         TreeMap<String, TreeSet<Integer>> treemap = new TreeMap<>();
         
-        // door alle items in uniqueWords loopen en dan per line kijken of die hem bevat,
+        // per uniqueWord kijken in welke regels die zit
         while(itUniqueWords.hasNext()) 
         {
             String word = itUniqueWords.next();
@@ -221,7 +223,7 @@ public class WoordenController implements Initializable {
             {
                 if(lines[i].contains(word)) 
                 {
-                    // zo ja voeg toe aan TreeMap
+                    // toevoegen aan TreeMap
                     if(treemap.containsKey(word)) 
                     {
                         treemap.get(word).add(i + 1);
