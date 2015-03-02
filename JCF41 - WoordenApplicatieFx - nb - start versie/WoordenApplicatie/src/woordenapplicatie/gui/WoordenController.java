@@ -62,16 +62,25 @@ public class WoordenController implements Initializable {
         taInput.setText(DEFAULT_TEXT);
     }
     
-    @FXML
-    private void aantalAction(ActionEvent event)
-    {
-        String text = taInput.getText();        
+    public String[] getWords(String text)
+    {       
         text = text.replaceAll(",", " ");
         text = text.replaceAll("\\.", " ");
         text = text.replaceAll("\n", " ");
+        
+        //extra filter
+        text = text.replaceAll("\\W+", " ");
+        
         text = text.replaceAll("\\s+", " ");
         text = text.toLowerCase();        
         String[] words = text.split(" ");
+        return words;
+    }
+    
+    @FXML
+    private void aantalAction(ActionEvent event)
+    {   
+        String[] words = getWords(taInput.getText());
         
         //HashSet add: O(1), size: O(1), geen dubbele waardes
         HashSet<String> hashset = new HashSet<>();
@@ -91,13 +100,7 @@ public class WoordenController implements Initializable {
     @FXML
     private void sorteerAction(ActionEvent event)
     {
-        String text = taInput.getText();          
-        text = text.replaceAll(",", " ");
-        text = text.replaceAll("\\.", " ");
-        text = text.replaceAll("\n", " ");
-        text = text.replaceAll("\\s+", " ");
-        text = text.toLowerCase();        
-        String[] words = text.split(" ");
+        String[] words = getWords(taInput.getText());
         
         //TreeSet add: geen dubbele waardes, gesorteerd: O(log n)
         TreeSet<String> treeset = new TreeSet();        
@@ -123,13 +126,7 @@ public class WoordenController implements Initializable {
     @FXML
     private void frequentieAction(ActionEvent event)
     {        
-        String text = taInput.getText();        
-        text = text.replaceAll(",", " ");
-        text = text.replaceAll("\\.", " ");
-        text = text.replaceAll("\n", " ");
-        text = text.replaceAll("\\s+", " ");
-        text = text.toLowerCase();        
-        String[] words = text.split(" ");
+        String[] words = getWords(taInput.getText());
         
         //HashMap get: O(1), put: O(1)
         HashMap<String, Integer> hashmap = new HashMap<>();
@@ -184,7 +181,7 @@ public class WoordenController implements Initializable {
         text = text.replaceAll(",", " ");
         text = text.replaceAll("\\.", " ");
         text = text.replaceAll("\n+", "\n");
-        text = text.toLowerCase();        
+        text = text.toLowerCase();
         
         String[] lineStrings = text.split("\n");
         
@@ -196,6 +193,9 @@ public class WoordenController implements Initializable {
         
         for(int i = 0; i < lineStrings.length; i++) 
         {
+            //extra filter
+            lineStrings[i] = lineStrings[i].replaceAll("\\W+", " ");
+            
             lineStrings[i] = lineStrings[i].replaceAll("\\s+", " ");
             String[] wordStrings = lineStrings[i].split(" ");
             
@@ -203,8 +203,11 @@ public class WoordenController implements Initializable {
             HashSet<String> words = new HashSet<>();
             for(String w : wordStrings) 
             {
-                uniqueWords.add(w);
-                words.add(w);
+                if (!w.isEmpty())
+                {
+                    uniqueWords.add(w);
+                    words.add(w);
+                }
             }
             lines[i] = words;
         }
@@ -242,7 +245,7 @@ public class WoordenController implements Initializable {
         
         for (Map.Entry<String, TreeSet<Integer>> me : treemap.entrySet())
         {
-            output += me.getKey() + " [";
+            output += me.getKey() + ": [";
             for(Integer i : me.getValue()) 
             {
                 output += i + ", ";
