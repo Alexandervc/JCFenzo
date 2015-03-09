@@ -5,9 +5,11 @@
  */
 package huffmancodering;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.TreeSet;
 
 /**
@@ -20,11 +22,14 @@ public class HuffmanCodering {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Map<Character, Integer> map = frequentieTellen("bananen");
+        PriorityQueue queue = frequentieSorteren(map);
+        PriorityQueue boom = huffmanBoomMaken(queue);
+        aflezenCodes((HuffKnoop) boom.poll());
     }
     
     // Stap 1
-    public static void frequentieTellen(String input)
+    public static Map<Character, Integer> frequentieTellen(String input)
     {
         char[] chars = input.toCharArray();
         
@@ -46,41 +51,44 @@ public class HuffmanCodering {
             }
         }
         
-        // blabla
+        return hashmap;
     }
     
     // Stap 2
-    public static void frequentieSorteren(Map<Character, Integer> map)
+    public static PriorityQueue frequentieSorteren(Map<Character, Integer> map)
     {
-        //Treeset addAll: O(n log n)
-        TreeSet<Map.Entry<Character, Integer>> sortedmap = new TreeSet<>(
-            new Comparator<Map.Entry<Character, Integer>>()
-            {
-                @Override
-                public int compare(Map.Entry<Character, Integer> t, Map.Entry<Character, Integer> t1) {
-                    if (t.getValue().equals(t1.getValue()))
-                    {
-                        return t.getKey().compareTo(t1.getKey());
-                    }
-
-                    return t.getValue().compareTo(t1.getValue());
-                }
-            }
-        );
+        PriorityQueue queue = new PriorityQueue();
+        for(Character c : map.keySet()) {
+            queue.add(new HuffKnoop(c, map.get(c)));
+        }
         
-        sortedmap.addAll(map.entrySet());
+        return queue;
     }
     
     // Stap 3
-    public static void huffmanBoomMaken()
+    public static PriorityQueue huffmanBoomMaken(PriorityQueue queue)
     {
+        while(queue.size() >= 2) {
+            HuffKnoop left = (HuffKnoop) queue.poll();
+            HuffKnoop right = (HuffKnoop) queue.poll();
+            int freq = left.frequentie + right.frequentie;
+            HuffKnoop knoop = new HuffKnoop(freq, left, right);
+            queue.add(knoop);
+        }
         
+        return queue;
     }
     
     // Stap 4
-    public static void aflezenCodes()
+    public static void aflezenCodes(HuffKnoop knoop)
     {
-        
+        if(knoop.leftChild != null) 
+        {
+            if(String.valueOf(knoop.leftChild.character).isEmpty()) 
+            {
+                
+            }
+        }
     }
     
     // Stap 5
