@@ -23,50 +23,41 @@ public class HuffmanCodering {
         // TODO code application logic here
     }
     
-    public String[] getWords(String text)
-    {       
-        text = text.replaceAll(",", " ");
-        text = text.replaceAll("\\.", " ");
-        text = text.replaceAll("\n", " ");
-        
-        //extra filter
-        text = text.replaceAll("\\W+", " ");
-        
-        text = text.replaceAll("\\s+", " ");
-        text = text.toLowerCase();        
-        String[] words = text.split(" ");
-        return words;
-    }
-    
     // Stap 1
     public static void frequentieTellen(String input)
     {
-        String[] words = getWords(input.getText());
+        char[] chars = input.toCharArray();
         
         //HashMap get: O(1), put: O(1)
-        HashMap<String, Integer> hashmap = new HashMap<>();
+        HashMap<Character, Integer> hashmap = new HashMap<>();
         
-        for (String s : words)
+        for (char c : chars)
         {
-            Integer i = hashmap.get(s);
+            Integer i = hashmap.get(c);
             
             if (i != null)
             {
-                i += 1;
-                hashmap.put(s, i);
+                i++;
+                hashmap.put(c, i);
             }
             else
             {
-                hashmap.put(s, 1);
+                hashmap.put(c, 1);
             }
         }
         
+        // blabla
+    }
+    
+    // Stap 2
+    public static void frequentieSorteren(Map<Character, Integer> map)
+    {
         //Treeset addAll: O(n log n)
-        TreeSet<Map.Entry<String, Integer>> sortedmap = new TreeSet<>(
-            new Comparator<Map.Entry<String, Integer>>()
+        TreeSet<Map.Entry<Character, Integer>> sortedmap = new TreeSet<>(
+            new Comparator<Map.Entry<Character, Integer>>()
             {
                 @Override
-                public int compare(Map.Entry<String, Integer> t, Map.Entry<String, Integer> t1) {
+                public int compare(Map.Entry<Character, Integer> t, Map.Entry<Character, Integer> t1) {
                     if (t.getValue().equals(t1.getValue()))
                     {
                         return t.getKey().compareTo(t1.getKey());
@@ -77,22 +68,7 @@ public class HuffmanCodering {
             }
         );
         
-        sortedmap.addAll(hashmap.entrySet());
-        
-        String output = "";
-        
-        for (Map.Entry<String, Integer> m : sortedmap)
-        {
-            output += m.getKey() + ": " + m.getValue() + "\n";
-        }
-        
-        taOutput.setText(output);
-    }
-    
-    // Stap 2
-    public static void frequentieSorteren()
-    {
-        
+        sortedmap.addAll(map.entrySet());
     }
     
     // Stap 3
