@@ -25,7 +25,9 @@ public class HuffmanCodering {
         Map<Character, Integer> map = frequentieTellen("bananen");
         PriorityQueue queue = frequentieSorteren(map);
         PriorityQueue boom = huffmanBoomMaken(queue);
-        aflezenCodes((HuffKnoop) boom.poll());
+        HashMap<Character, String> table = new HashMap<>();
+        aflezenCodes((HuffKnoop) boom.poll(), "", table);
+        System.out.println(table.toString());
     }
     
     // Stap 1
@@ -80,13 +82,32 @@ public class HuffmanCodering {
     }
     
     // Stap 4
-    public static void aflezenCodes(HuffKnoop knoop)
+    public static void aflezenCodes(HuffKnoop knoop, String code, HashMap<Character, String> table)
     {
         if(knoop.leftChild != null) 
         {
-            if(String.valueOf(knoop.leftChild.character).isEmpty()) 
+            code += "0";
+            if(knoop.leftChild.character == null) 
             {
-                
+                aflezenCodes(knoop.leftChild, code, table);
+            }
+            else 
+            {
+                table.put(knoop.leftChild.character, code);
+                code = code.substring(0, code.length() - 1);
+            }
+        }
+        if(knoop.rightChild != null) 
+        {
+            code += "1";
+            if(knoop.rightChild.character == null) 
+            {
+                aflezenCodes(knoop.rightChild, code, table);
+            }
+            else 
+            {
+                table.put(knoop.rightChild.character, code);
+                code = code.substring(0, code.length() - 1);
             }
         }
     }

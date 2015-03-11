@@ -12,11 +12,11 @@ import java.util.Comparator;
  * @author Alexander
  */
 public class HuffKnoop implements Comparable<HuffKnoop> {
-    public char character;
+    public Character character;
     public int frequentie;
     public HuffKnoop leftChild, rightChild;
     
-    public HuffKnoop(char character, int frequentie) 
+    public HuffKnoop(Character character, int frequentie) 
     {
         this.character = character;
         this.frequentie = frequentie;
