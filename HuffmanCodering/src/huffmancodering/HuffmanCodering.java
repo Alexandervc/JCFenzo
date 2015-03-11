@@ -22,12 +22,40 @@ public class HuffmanCodering {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Map<Character, Integer> map = frequentieTellen("bananen");
+        //String bericht = "bananen";
+        String bericht = "laboratoriumonderzoek";
+        
+        // Stap 1
+        Map<Character, Integer> map = frequentieTellen(bericht);
+        System.out.println(map.toString());
+        
+        // Stap 2
         PriorityQueue queue = frequentieSorteren(map);
+        
+        // Stap 3
         PriorityQueue boom = huffmanBoomMaken(queue);
-        HashMap<Character, String> table = new HashMap<>();
-        aflezenCodes((HuffKnoop) boom.poll(), "", table);
-        System.out.println(table.toString());
+        
+        // Stap 4
+        HuffKnoop hoofdKnoop = (HuffKnoop) boom.poll();
+        HashMap<Character, String> tabel = new HashMap<>();
+        aflezenCodes(hoofdKnoop, "", tabel);
+        System.out.println(tabel.toString());
+        
+        // Stap 5
+        String gecodeerdBericht = coderenBericht(tabel, bericht);
+        System.out.println(gecodeerdBericht);
+        
+        // Stap 6
+        ArrayList<Character> gecodeerdArray = new ArrayList<>();
+        
+        for(char c : gecodeerdBericht.toCharArray()) 
+        {
+            gecodeerdArray.add(c);
+        }
+        
+        StringBuilder ontvangenBericht = new StringBuilder("");
+        decoderenBericht(hoofdKnoop, hoofdKnoop, ontvangenBericht, gecodeerdArray);
+        System.out.println(ontvangenBericht.toString());
     }
     
     // Stap 1
@@ -82,45 +110,84 @@ public class HuffmanCodering {
     }
     
     // Stap 4
-    public static void aflezenCodes(HuffKnoop knoop, String code, HashMap<Character, String> table)
+    public static void aflezenCodes(HuffKnoop knoop, String code, HashMap<Character, String> tabel)
     {
         if(knoop.leftChild != null) 
         {
             code += "0";
             if(knoop.leftChild.character == null) 
             {
-                aflezenCodes(knoop.leftChild, code, table);
+                aflezenCodes(knoop.leftChild, code, tabel);
             }
             else 
             {
-                table.put(knoop.leftChild.character, code);
-                code = code.substring(0, code.length() - 1);
+                tabel.put(knoop.leftChild.character, code);
             }
+            
+            code = code.substring(0, code.length() - 1);
         }
         if(knoop.rightChild != null) 
         {
             code += "1";
             if(knoop.rightChild.character == null) 
             {
-                aflezenCodes(knoop.rightChild, code, table);
+                aflezenCodes(knoop.rightChild, code, tabel);
             }
             else 
             {
-                table.put(knoop.rightChild.character, code);
-                code = code.substring(0, code.length() - 1);
+                tabel.put(knoop.rightChild.character, code);
             }
+            
+            code = code.substring(0, code.length() - 1);
         }
     }
     
     // Stap 5
-    public static void coderenBericht()
+    public static String coderenBericht(HashMap<Character, String> tabel, String bericht)
     {
-        
+        char[] chars = bericht.toCharArray();
+        String gecodeerdBericht = "";
+        for(char c : chars) 
+        {
+            gecodeerdBericht += tabel.get(c);
+        }
+        return gecodeerdBericht;
     }
     
     // Stap 6
-    public static void decoderenBericht() 
+    public static void decoderenBericht(HuffKnoop hoofdKnoop, HuffKnoop knoop, StringBuilder bericht, ArrayList<Character> gecodeerdBericht) 
     {
-        
+        if(gecodeerdBericht.size() > 0) 
+        {
+            Character nummer = gecodeerdBericht.get(0);
+            if(nummer == '0') 
+            {
+                if(knoop.leftChild.character != null)
+                {
+                    bericht.append(knoop.leftChild.character);
+                    gecodeerdBericht.remove(0);
+                    decoderenBericht(hoofdKnoop, hoofdKnoop, bericht, gecodeerdBericht);
+                }
+                else 
+                {
+                    gecodeerdBericht.remove(0);
+                    decoderenBericht(hoofdKnoop, knoop.leftChild, bericht, gecodeerdBericht);
+                }
+            }
+            else if (nummer == '1') 
+            {
+                if(knoop.rightChild.character != null) 
+                {
+                    bericht.append(knoop.rightChild.character);
+                    gecodeerdBericht.remove(0);
+                    decoderenBericht(hoofdKnoop, hoofdKnoop, bericht, gecodeerdBericht);
+                }
+                else
+                {
+                    gecodeerdBericht.remove(0);
+                    decoderenBericht(hoofdKnoop, knoop.rightChild, bericht, gecodeerdBericht);
+                }
+            }
+        }
     }
 }
