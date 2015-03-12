@@ -54,7 +54,7 @@ public class HuffmanCodering {
         }
         
         StringBuilder ontvangenBericht = new StringBuilder("");
-        decoderenBericht(hoofdKnoop, hoofdKnoop, ontvangenBericht, gecodeerdArray);
+        decoderenBericht(hoofdKnoop, hoofdKnoop, ontvangenBericht, gecodeerdArray, 0);
         System.out.println(ontvangenBericht.toString());
     }
     
@@ -87,6 +87,8 @@ public class HuffmanCodering {
     // Stap 2
     public static PriorityQueue frequentieSorteren(Map<Character, Integer> map)
     {
+        // PriorityQueue add: O(log n)
+        // HashMap get: O(1)
         PriorityQueue queue = new PriorityQueue();
         for(Character c : map.keySet()) {
             queue.add(new HuffKnoop(c, map.get(c)));
@@ -98,6 +100,7 @@ public class HuffmanCodering {
     // Stap 3
     public static PriorityQueue huffmanBoomMaken(PriorityQueue queue)
     {
+        // PriorityQueue poll: O(log n), add: O(log n)
         while(queue.size() >= 2) {
             HuffKnoop left = (HuffKnoop) queue.poll();
             HuffKnoop right = (HuffKnoop) queue.poll();
@@ -112,9 +115,11 @@ public class HuffmanCodering {
     // Stap 4
     public static void aflezenCodes(HuffKnoop knoop, String code, HashMap<Character, String> tabel)
     {
+        // HashMap put: O(1)
         if(knoop.leftChild != null) 
         {
             code += "0";
+            
             if(knoop.leftChild.character == null) 
             {
                 aflezenCodes(knoop.leftChild, code, tabel);
@@ -126,9 +131,11 @@ public class HuffmanCodering {
             
             code = code.substring(0, code.length() - 1);
         }
+        
         if(knoop.rightChild != null) 
         {
             code += "1";
+            
             if(knoop.rightChild.character == null) 
             {
                 aflezenCodes(knoop.rightChild, code, tabel);
@@ -145,33 +152,38 @@ public class HuffmanCodering {
     // Stap 5
     public static String coderenBericht(HashMap<Character, String> tabel, String bericht)
     {
+        // HashMap get: O(1)
         char[] chars = bericht.toCharArray();
         String gecodeerdBericht = "";
+        
         for(char c : chars) 
         {
             gecodeerdBericht += tabel.get(c);
         }
+        
         return gecodeerdBericht;
     }
     
     // Stap 6
-    public static void decoderenBericht(HuffKnoop hoofdKnoop, HuffKnoop knoop, StringBuilder bericht, ArrayList<Character> gecodeerdBericht) 
+    public static void decoderenBericht(HuffKnoop hoofdKnoop, HuffKnoop knoop, StringBuilder bericht, ArrayList<Character> gecodeerdBericht, int count) 
     {
+        // ArrayList get: O(1), size: O(1)
         if(gecodeerdBericht.size() > 0) 
         {
-            Character nummer = gecodeerdBericht.get(0);
+            Character nummer = gecodeerdBericht.get(count);
+            
             if(nummer == '0') 
             {
                 if(knoop.leftChild.character != null)
                 {
                     bericht.append(knoop.leftChild.character);
-                    gecodeerdBericht.remove(0);
-                    decoderenBericht(hoofdKnoop, hoofdKnoop, bericht, gecodeerdBericht);
+                    count++;
+                    decoderenBericht(hoofdKnoop, hoofdKnoop, bericht, gecodeerdBericht, count);
                 }
                 else 
                 {
-                    gecodeerdBericht.remove(0);
-                    decoderenBericht(hoofdKnoop, knoop.leftChild, bericht, gecodeerdBericht);
+                    count++;
+                    decoderenBericht(hoofdKnoop, knoop.leftChild, bericht, gecodeerdBericht, count);
                 }
             }
             else if (nummer == '1') 
@@ -179,13 +191,13 @@ public class HuffmanCodering {
                 if(knoop.rightChild.character != null) 
                 {
                     bericht.append(knoop.rightChild.character);
-                    gecodeerdBericht.remove(0);
-                    decoderenBericht(hoofdKnoop, hoofdKnoop, bericht, gecodeerdBericht);
+                    count++;
+                    decoderenBericht(hoofdKnoop, hoofdKnoop, bericht, gecodeerdBericht, count);
                 }
                 else
                 {
-                    gecodeerdBericht.remove(0);
-                    decoderenBericht(hoofdKnoop, knoop.rightChild, bericht, gecodeerdBericht);
+                    count++;
+                    decoderenBericht(hoofdKnoop, knoop.rightChild, bericht, gecodeerdBericht, count);
                 }
             }
         }
