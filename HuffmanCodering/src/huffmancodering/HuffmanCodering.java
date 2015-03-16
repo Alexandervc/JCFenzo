@@ -22,8 +22,8 @@ public class HuffmanCodering {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String bericht = "bananen";
-        //String bericht = "laboratoriumonderzoek";
+        //String bericht = "bananen";
+        String bericht = "laboratoriumonderzoek";
         
         // Stap 1
         Map<Character, Integer> map = frequentieTellen(bericht);
@@ -168,7 +168,7 @@ public class HuffmanCodering {
     public static void decoderenBericht(HuffKnoop hoofdKnoop, HuffKnoop knoop, StringBuilder bericht, ArrayList<Character> gecodeerdBericht, int count) 
     {
         // ArrayList get: O(1), size: O(1)
-        if(gecodeerdBericht.size() > 0) 
+        if(gecodeerdBericht.size() > count) 
         {
             Character nummer = gecodeerdBericht.get(count);
             
