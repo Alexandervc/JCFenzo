@@ -22,8 +22,8 @@ public class HuffmanCodering {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //String bericht = "bananen";
-        String bericht = "laboratoriumonderzoek";
+        String bericht = "bananen";
+        //String bericht = "laboratoriumonderzoek";
         
         // Stap 1
         Map<Character, Integer> map = frequentieTellen(bericht);
@@ -100,7 +100,7 @@ public class HuffmanCodering {
     // Stap 3
     public static PriorityQueue huffmanBoomMaken(PriorityQueue queue)
     {
-        // PriorityQueue poll: O(log n), add: O(log n)
+        // PriorityQueue poll: O(log n), add: O(log n), size: O(1)
         while(queue.size() >= 2) {
             HuffKnoop left = (HuffKnoop) queue.poll();
             HuffKnoop right = (HuffKnoop) queue.poll();
