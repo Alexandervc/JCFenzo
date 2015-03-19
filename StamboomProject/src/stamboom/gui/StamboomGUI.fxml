@@ -19,7 +19,7 @@
               <content>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                   <children>
-                    <TreeView fx:id="trvStamboom" layoutX="14.0" layoutY="14.0" prefHeight="332.0" prefWidth="666.0" />
+                    <TreeView fx:id="trvStamboom" layoutX="14.0" layoutY="14.0" prefHeight="332.0" prefWidth="666.0" showRoot="false" />
                     <TableView fx:id="tavPersonen" layoutX="14.0" layoutY="363.0" prefHeight="200.0" prefWidth="666.0">
                       <columns>
                         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Ouder/kind" fx:id="tcOuderKind" />
@@ -82,7 +82,7 @@
                             <TextField id="tfGeslacht" fx:id="tfGeslacht2" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                             <TextField id="tfPersoonNr" fx:id="tfGebDatum2" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                             <TextField id="tfPersoonNr" fx:id="tfGebPlaats2" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                            <ComboBox id="cbOuderlijkGezin" fx:id="cbOuderlijkGezin2" onAction="#setOuders" prefWidth="400.0" promptText="" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                            <ComboBox id="cbOuderlijkGezin" fx:id="cbOuderlijkGezin2" prefWidth="400.0" promptText="" GridPane.columnIndex="1" GridPane.rowIndex="6">
                               <items>
                                 <FXCollections fx:factory="observableArrayList">
                                   <String fx:value="Item 1" />

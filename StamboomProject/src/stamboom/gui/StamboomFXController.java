@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.*;;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -40,7 +42,7 @@ public class StamboomFXController extends StamboomController implements Initiali
     @FXML Tab tabStamboom;    
     
     //PERSOON JCF
-    @FXML TreeView trvStamboom;
+    @FXML TreeView<Persoon> trvStamboom;
     @FXML TableView tavPersonen;
     @FXML TableColumn tcOuderKind;
     @FXML TableColumn tcVoornaam;
@@ -92,6 +94,21 @@ public class StamboomFXController extends StamboomController implements Initiali
         withDatabase = true;        
         controller = new StamboomController();
         initComboboxes();
+        showStamboom();
+        
+        //JCF Opdracht 2
+        trvStamboom.getSelectionModel().selectedItemProperty().addListener(new ChangeListener()
+        {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                TreeItem<Persoon> selectedItem = (TreeItem<Persoon>)newValue;
+                
+                if (selectedItem != null)
+                {
+                    showPersoon(selectedItem.getValue());
+                }
+            }
+        });
     }
 
     private void initComboboxes()
@@ -123,18 +140,60 @@ public class StamboomFXController extends StamboomController implements Initiali
             cbGezin.setItems(null);
             cbOuderlijkGezin2.setItems(null);
         }
-    }
-
-    public void selectPersoon(Event evt)
+    }    
+    
+    //JCF Opdracht 1
+    public void showStamboom() 
     {
-        //TODO (select persoon in treeview)
-        //Persoon persoon = (Persoon) cbPersonen.getSelectionModel().getSelectedItem();
-        //showPersoon(persoon);
+        //laten zien bij opstarten, voor alle personen     
+        Administratie admin = this.getAdministratie();
+        TreeItem<Persoon> root = new TreeItem<Persoon>(null);
+        trvStamboom.setRoot(root);
+        
+        if (admin.getPersonen() != null)
+        {
+            for (Persoon p : admin.getPersonen())
+            {
+                TreeItem<Persoon> per = new TreeItem<Persoon>(p);
+                trvStamboom.getRoot().getChildren().add(per);
+                setOuders(per);
+            }
+        }
     }
-
+    
+    //JCF Opdracht 2
     private void showPersoon(Persoon persoon)
     {
-        //TODO (selected in treeview)
+        //selected in treeview
+        if (persoon != null)
+        {
+            System.out.println(persoon.toString());
+        }
+    }
+    
+    public void setOuders(TreeItem<Persoon> pers)
+    {
+        Persoon p = pers.getValue();
+        
+        if (p.getOuderlijkGezin() != null)
+        {
+            Persoon o1 = p.getOuderlijkGezin().getOuder1();
+            Persoon o2 = p.getOuderlijkGezin().getOuder2();
+            
+            if (o1 != null)
+            {
+                TreeItem<Persoon> o = new TreeItem<Persoon>(o1);
+                pers.getChildren().add(o);
+                setOuders(o);
+            }
+
+            if (o2 != null)
+            {
+                TreeItem<Persoon> o = new TreeItem<Persoon>(o2);
+                pers.getChildren().add(o);
+                setOuders(o);
+            }
+        }
     }
 
     public void selectGezin(Event evt)
@@ -287,7 +346,6 @@ public class StamboomFXController extends StamboomController implements Initiali
 
     public void okPersoonInvoer(Event evt)
     {
-        // todo opgave 3
         String[] vnamen = tfVoornamen2.getText().split(" ");        
         String tvoegsel = tfTussenvoegsel2.getText();
         String anaam = tfAchternaam2.getText();        
@@ -458,17 +516,6 @@ public class StamboomFXController extends StamboomController implements Initiali
     {
         clearTabGezinInvoer();
     }
-    
-    public void showStamboom(Event evt) 
-    {
-        //TODO (laten zien bij opstarten, voor alle personen)
-//        Persoon persoon = (Persoon) cbPersonen.getSelectionModel().getSelectedItem();
-//        
-//        if (persoon != null)
-//        {
-//            taStamboom.setText(persoon.stamboomAlsString());
-//        }
-    }
 
     public void createEmptyStamboom(Event evt) 
     {
@@ -631,8 +678,13 @@ public class StamboomFXController extends StamboomController implements Initiali
 
     private void clearTabPersoon() 
     {
-        //trvStamboom
-        //tavPersonen
+        if (trvStamboom.getRoot() != null)
+        {
+            trvStamboom.getRoot().getChildren().clear();
+        }
+        
+        tavPersonen.getItems().clear();        
+        showStamboom();
     }
     
     private void clearTabGezin() 

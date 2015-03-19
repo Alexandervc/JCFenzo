@@ -441,8 +441,6 @@ public class Persoon implements Serializable
     public String stamboomAlsString()
     {
         StringBuilder builder = new StringBuilder();
-        
-        int generatie = 0;
         ArrayList<PersoonMetGeneratie> lijst = new ArrayList<>();
         
         //Ophalen van de stamboom
