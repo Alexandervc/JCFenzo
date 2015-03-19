@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.*;;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -102,7 +100,6 @@ public class StamboomFXController extends StamboomController implements Initiali
         
         if(admin.getPersonen() != null)
         {
-            cbPersonen.setItems(admin.getPersonen());
             cbOuder1Invoer.setItems(admin.getPersonen());
             cbOuder2Invoer.setItems(admin.getPersonen());
             cbOuder1Invoer2.setItems(admin.getPersonen());
@@ -110,7 +107,6 @@ public class StamboomFXController extends StamboomController implements Initiali
         }
         else
         {
-            cbPersonen.setItems(null);
             cbOuder1Invoer.setItems(null);
             cbOuder2Invoer.setItems(null);
             cbOuder1Invoer2.setItems(null);
@@ -120,71 +116,25 @@ public class StamboomFXController extends StamboomController implements Initiali
         if (admin.getGezinnen() != null)
         {
             cbGezin.setItems(admin.getGezinnen());        
-            cbOuderlijkGezin.setItems(admin.getGezinnen());
             cbOuderlijkGezin2.setItems(admin.getGezinnen());
         }
         else
         {
             cbGezin.setItems(null);
-            cbOuderlijkGezin.setItems(null);
             cbOuderlijkGezin2.setItems(null);
         }
     }
 
     public void selectPersoon(Event evt)
     {
-        Persoon persoon = (Persoon) cbPersonen.getSelectionModel().getSelectedItem();
-        showPersoon(persoon);
+        //TODO (select persoon in treeview)
+        //Persoon persoon = (Persoon) cbPersonen.getSelectionModel().getSelectedItem();
+        //showPersoon(persoon);
     }
 
     private void showPersoon(Persoon persoon)
     {
-        if (persoon == null)
-        {
-            clearTabPersoon();
-        }
-        else
-        {
-            tfPersoonNr.setText(persoon.getNr() + "");
-            tfVoornamen.setText(persoon.getVoornamen());
-            tfTussenvoegsel.setText(persoon.getTussenvoegsel());
-            tfAchternaam.setText(persoon.getAchternaam());
-            tfGeslacht.setText(persoon.getGeslacht().toString());
-            tfGebDatum.setText(StringUtilities.datumString(persoon.getGebDat()));
-            tfGebPlaats.setText(persoon.getGebPlaats());
-            
-            if (persoon.getOuderlijkGezin() != null)
-            {
-                cbOuderlijkGezin.getSelectionModel().select(persoon.getOuderlijkGezin());
-            }
-            else
-            {
-                cbOuderlijkGezin.getSelectionModel().clearSelection();
-            }
-
-            lvAlsOuderBetrokkenBij.setItems(persoon.getAlsOuderBetrokkenIn());
-        }
-    }
-
-    public void setOuders(Event evt)
-    {
-        if (tfPersoonNr.getText().isEmpty())
-        {
-            return;
-        }
-        
-        Persoon persoon = (Persoon) cbPersonen.getSelectionModel().getSelectedItem();
-        Gezin ouderlijkGezin = (Gezin) cbOuderlijkGezin.getSelectionModel().getSelectedItem();
-        
-        if (ouderlijkGezin == null || ouderlijkGezin.getOuder1() == persoon ||
-                ouderlijkGezin.getOuder2() == persoon || persoon.getOuderlijkGezin() == ouderlijkGezin)
-        {
-            return;
-        }
-
-        int nr = Integer.parseInt(tfPersoonNr.getText());
-        Persoon p = this.getAdministratie().getPersoon(nr);
-        this.getAdministratie().setOuders(p, ouderlijkGezin);
+        //TODO (selected in treeview)
     }
 
     public void selectGezin(Event evt)
@@ -511,12 +461,13 @@ public class StamboomFXController extends StamboomController implements Initiali
     
     public void showStamboom(Event evt) 
     {
-        Persoon persoon = (Persoon) cbPersonen.getSelectionModel().getSelectedItem();
-        
-        if (persoon != null)
-        {
-            taStamboom.setText(persoon.stamboomAlsString());
-        }
+        //TODO (laten zien bij opstarten, voor alle personen)
+//        Persoon persoon = (Persoon) cbPersonen.getSelectionModel().getSelectedItem();
+//        
+//        if (persoon != null)
+//        {
+//            taStamboom.setText(persoon.stamboomAlsString());
+//        }
     }
 
     public void createEmptyStamboom(Event evt) 
@@ -680,17 +631,8 @@ public class StamboomFXController extends StamboomController implements Initiali
 
     private void clearTabPersoon() 
     {
-        cbPersonen.getSelectionModel().clearSelection();
-        tfPersoonNr.clear();
-        tfVoornamen.clear();
-        tfTussenvoegsel.clear();
-        tfAchternaam.clear();
-        tfGeslacht.clear();
-        tfGebDatum.clear();
-        tfGebPlaats.clear();
-        taStamboom.clear();
-        cbOuderlijkGezin.getSelectionModel().clearSelection();
-        lvAlsOuderBetrokkenBij.setItems(FXCollections.emptyObservableList());
+        //trvStamboom
+        //tavPersonen
     }
     
     private void clearTabGezin() 
