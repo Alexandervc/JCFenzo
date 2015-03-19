@@ -7,7 +7,9 @@ package stamboom.gui;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,6 +18,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import stamboom.controller.StamboomController;
@@ -44,11 +47,11 @@ public class StamboomFXController extends StamboomController implements Initiali
     //PERSOON JCF
     @FXML TreeView<Persoon> trvStamboom;
     @FXML TableView tavPersonen;
-    @FXML TableColumn tcOuderKind;
-    @FXML TableColumn tcVoornaam;
-    @FXML TableColumn tcAchternaam;
-    @FXML TableColumn tcGeboortedatum;
-    @FXML TableColumn tcGeslacht;
+    @FXML TableColumn<Persoon, String> tcOuderKind;
+    @FXML TableColumn<Persoon, String> tcVoornaam;
+    @FXML TableColumn<Persoon, String> tcAchternaam;
+    @FXML TableColumn<Persoon, String> tcGeboortedatum;
+    @FXML TableColumn<Persoon, String> tcGeslacht;
     
     //INVOER PERSOON
     @FXML TextField tfVoornamen2;
@@ -109,6 +112,12 @@ public class StamboomFXController extends StamboomController implements Initiali
                 }
             }
         });
+        
+        tcOuderKind.setCellValueFactory(new PropertyValueFactory<Persoon, String>("roepnaam"));
+        tcVoornaam.setCellValueFactory(new PropertyValueFactory<Persoon, String>("roepnaam"));
+        tcAchternaam.setCellValueFactory(new PropertyValueFactory<Persoon, String>("achternaam"));
+        tcGeboortedatum.setCellValueFactory(new PropertyValueFactory<Persoon, String>("gebString"));
+        tcGeslacht.setCellValueFactory(new PropertyValueFactory<Persoon, String>("roepnaam"));
     }
 
     private void initComboboxes()
@@ -165,10 +174,73 @@ public class StamboomFXController extends StamboomController implements Initiali
     private void showPersoon(Persoon persoon)
     {
         //selected in treeview
+        ObservableList<Persoon> list = FXCollections.observableList(new ArrayList<Persoon>());
+        Administratie admin = this.getAdministratie();
+        
         if (persoon != null)
-        {
-            System.out.println(persoon.toString());
+        { 
+            if (persoon.getOuderlijkGezin() != null)
+            {
+                //Ouders
+                Persoon o1 = persoon.getOuderlijkGezin().getOuder1();
+                Persoon o2 = persoon.getOuderlijkGezin().getOuder2();
+
+                addGezin(list, persoon.getOuderlijkGezin());
+
+                if (o1 != null)
+                {
+                    for (Gezin o : o1.getAlsOuderBetrokkenIn())
+                    {
+                        if (o != persoon.getOuderlijkGezin())
+                        {
+                            addGezin(list, o);
+                        }
+                    }
+                }
+
+                if (o2 != null)
+                {
+                    for (Gezin o : o2.getAlsOuderBetrokkenIn())
+                    {
+                        if (o != persoon.getOuderlijkGezin())
+                        {
+                            addGezin(list, o);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                list.add(persoon);
+            }
+            
+            tavPersonen.setItems(list);
         }
+    }
+    
+    public void addGezin(ObservableList<Persoon> list, Gezin gezin)
+    {
+        Persoon o1 = gezin.getOuder1();
+        Persoon o2 = gezin.getOuder2();
+        
+        if (gezin != null)
+        {            
+            if (o1 != null)
+            {
+                list.add(o1);
+            }
+            
+            if (o2 != null)
+            {
+                list.add(o2);
+            }
+            
+            //Kinderen
+            for (Persoon p : gezin.getKinderen())
+            {
+                list.add(p);
+            }
+        }        
     }
     
     public void setOuders(TreeItem<Persoon> pers)

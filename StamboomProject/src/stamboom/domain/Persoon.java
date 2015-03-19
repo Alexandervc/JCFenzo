@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.*;
 import stamboom.util.StringUtilities;
 
@@ -14,7 +15,6 @@ public class Persoon implements Serializable
     // ********datavelden**************************************
     private final int nr;
     private final String[] voornamen;
-    private final String achternaam;
     private final String tussenvoegsel;
     private final Calendar gebDat;
     private final String gebPlaats;
@@ -22,6 +22,10 @@ public class Persoon implements Serializable
     private final List<Gezin> alsOuderBetrokkenIn;
     private transient ObservableList<Gezin> oGezinnen;
     private final Geslacht geslacht;
+    
+    private final SimpleStringProperty roepnaam;
+    private final SimpleStringProperty achternaam;
+    private final SimpleStringProperty gebString;
 
     // ********constructoren***********************************
     /**
@@ -39,9 +43,11 @@ public class Persoon implements Serializable
     {
         this.nr = persNr;
         this.voornamen = vnamen;
-        this.achternaam = anaam;
+        this.roepnaam = new SimpleStringProperty(this.voornamen[0]);
+        this.achternaam = new SimpleStringProperty(anaam);
         this.tussenvoegsel = tvoegsel;
         this.gebDat = gebdat;
+        this.gebString = new SimpleStringProperty(StringUtilities.datumString(gebdat));
         this.gebPlaats = gebplaats;
         this.geslacht = g;
         this.ouderlijkGezin = ouderlijkgezin;
@@ -55,7 +61,17 @@ public class Persoon implements Serializable
      */
     public String getAchternaam()
     {
-        return this.achternaam;
+        return this.achternaam.get();
+    }
+    
+    public String getRoepnaam()
+    {
+        return this.roepnaam.get();
+    }
+    
+    public String getGebString()
+    {
+        return this.gebString.get();
     }
 
     /**
@@ -114,7 +130,7 @@ public class Persoon implements Serializable
      */
     public String getNaam()
     {
-        return convertNaam(getInitialen(), this.tussenvoegsel, this.achternaam);
+        return convertNaam(getInitialen(), this.tussenvoegsel, this.achternaam.get());
     }
     
     public String convertNaam(String initialen, String tvoegsel, String anaam)
