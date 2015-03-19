@@ -40,20 +40,15 @@ public class StamboomFXController extends StamboomController implements Initiali
     @FXML Tab tabPersoonInvoer;
     @FXML Tab tabGezinInvoer;
     @FXML Tab tabStamboom;    
-
-    //PERSOON
-    @FXML ComboBox cbPersonen;
-    @FXML TextField tfPersoonNr;
-    @FXML TextField tfVoornamen;
-    @FXML TextField tfTussenvoegsel;
-    @FXML TextField tfAchternaam;
-    @FXML TextField tfGeslacht;
-    @FXML TextField tfGebDatum;
-    @FXML TextField tfGebPlaats;
-    @FXML ComboBox cbOuderlijkGezin;
-    @FXML ListView lvAlsOuderBetrokkenBij;
-    @FXML Button btStamboom;
-    @FXML TextArea taStamboom;
+    
+    //PERSOON JCF
+    @FXML TreeView trvStamboom;
+    @FXML TableView tavPersonen;
+    @FXML TableColumn tcOuderKind;
+    @FXML TableColumn tcVoornaam;
+    @FXML TableColumn tcAchternaam;
+    @FXML TableColumn tcGeboortedatum;
+    @FXML TableColumn tcGeslacht;
     
     //INVOER PERSOON
     @FXML TextField tfVoornamen2;
