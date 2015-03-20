@@ -26,6 +26,8 @@ public class Persoon implements Serializable
     private final SimpleStringProperty roepnaam;
     private final SimpleStringProperty achternaam;
     private final SimpleStringProperty gebString;
+    private final SimpleStringProperty persNr;
+    private final SimpleStringProperty geslachtt;
 
     // ********constructoren***********************************
     /**
@@ -42,6 +44,7 @@ public class Persoon implements Serializable
             Calendar gebdat, String gebplaats, Geslacht g, Gezin ouderlijkgezin)
     {
         this.nr = persNr;
+        this.persNr = new SimpleStringProperty(String.valueOf(this.nr));
         this.voornamen = vnamen;
         this.roepnaam = new SimpleStringProperty(this.voornamen[0]);
         this.achternaam = new SimpleStringProperty(anaam);
@@ -50,6 +53,7 @@ public class Persoon implements Serializable
         this.gebString = new SimpleStringProperty(StringUtilities.datumString(gebdat));
         this.gebPlaats = gebplaats;
         this.geslacht = g;
+        this.geslachtt = new SimpleStringProperty(this.geslacht.name());
         this.ouderlijkGezin = ouderlijkgezin;
         this.alsOuderBetrokkenIn = new ArrayList<>();
         this.oGezinnen = FXCollections.observableList(alsOuderBetrokkenIn);
@@ -72,6 +76,16 @@ public class Persoon implements Serializable
     public String getGebString()
     {
         return this.gebString.get();
+    }
+    
+    public String getPersNr()
+    {
+        return this.persNr.get();
+    }
+    
+    public String getGeslachtt()
+    {
+        return this.geslachtt.get();
     }
 
     /**

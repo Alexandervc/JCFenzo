@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -19,8 +19,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import stamboom.controller.StamboomController;
 import stamboom.domain.*;
 import stamboom.util.StringUtilities;
@@ -91,6 +95,9 @@ public class StamboomFXController extends StamboomController implements Initiali
     private boolean withDatabase;
     private StamboomController controller;
     
+    //JCF
+    private HashMap<String, String> map;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {       
@@ -100,6 +107,8 @@ public class StamboomFXController extends StamboomController implements Initiali
         showStamboom();
         
         //JCF Opdracht 2
+        map = new HashMap<String, String>();
+        
         trvStamboom.getSelectionModel().selectedItemProperty().addListener(new ChangeListener()
         {
             @Override
@@ -113,11 +122,56 @@ public class StamboomFXController extends StamboomController implements Initiali
             }
         });
         
-        tcOuderKind.setCellValueFactory(new PropertyValueFactory<Persoon, String>("roepnaam"));
+        tcOuderKind.setCellValueFactory(new PropertyValueFactory<Persoon, String>("persNr"));
+        tcOuderKind.setCellFactory(new Callback<TableColumn<Persoon, String>, TableCell<Persoon, String>>() {
+
+            @Override
+            public TableCell<Persoon, String> call(TableColumn<Persoon, String> param) {
+                return new TableCell<Persoon, String>() {
+                    
+                    @Override
+                    protected void updateItem(String item, boolean empty)
+                    {                        
+                        super.updateItem(item, empty);
+                        setText(map.get(item));
+                    }
+                };
+            }
+        });
+        
         tcVoornaam.setCellValueFactory(new PropertyValueFactory<Persoon, String>("roepnaam"));
         tcAchternaam.setCellValueFactory(new PropertyValueFactory<Persoon, String>("achternaam"));
         tcGeboortedatum.setCellValueFactory(new PropertyValueFactory<Persoon, String>("gebString"));
-        tcGeslacht.setCellValueFactory(new PropertyValueFactory<Persoon, String>("roepnaam"));
+        
+        tcGeslacht.setCellValueFactory(new PropertyValueFactory<Persoon, String>("geslachtt"));
+        tcGeslacht.setCellFactory(new Callback<TableColumn<Persoon, String>, TableCell<Persoon, String>>() {
+
+            @Override
+            public TableCell<Persoon, String> call(TableColumn<Persoon, String> param) {
+                return new TableCell<Persoon, String>() {
+                    @Override
+                    protected void updateItem(String item, boolean empty)
+                    { 
+                        setGraphic(null);
+                        
+                        if (item != null)
+                        {
+                            super.updateItem(item, empty);
+                            
+                            if (item.equals("VROUW"))
+                            {
+                                setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream("female.png"))));
+                            }
+
+                            if (item.equals("MAN"))
+                            {
+                                setGraphic(new ImageView(new Image(this.getClass().getResourceAsStream("male.png"))));
+                            }    
+                        }
+                    }
+                };
+            }
+        });
     }
 
     private void initComboboxes()
@@ -176,6 +230,7 @@ public class StamboomFXController extends StamboomController implements Initiali
         //selected in treeview
         ObservableList<Persoon> list = FXCollections.observableList(new ArrayList<Persoon>());
         Administratie admin = this.getAdministratie();
+        map.clear();
         
         if (persoon != null)
         { 
@@ -212,6 +267,7 @@ public class StamboomFXController extends StamboomController implements Initiali
             else
             {
                 list.add(persoon);
+                map.put(persoon.getPersNr(), "Kind");
             }
             
             tavPersonen.setItems(list);
@@ -228,17 +284,20 @@ public class StamboomFXController extends StamboomController implements Initiali
             if (o1 != null)
             {
                 list.add(o1);
+                map.put(o1.getPersNr(), "Ouder");
             }
             
             if (o2 != null)
             {
                 list.add(o2);
+                map.put(o2.getPersNr(), "Ouder");
             }
             
             //Kinderen
             for (Persoon p : gezin.getKinderen())
             {
                 list.add(p);
+                map.put(p.getPersNr(), "Kind");
             }
         }        
     }

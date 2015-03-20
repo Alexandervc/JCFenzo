@@ -23,7 +23,7 @@
                     <TableView fx:id="tavPersonen" layoutX="14.0" layoutY="363.0" prefHeight="200.0" prefWidth="666.0">
                       <columns>
                         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Ouder/kind" fx:id="tcOuderKind" />
-                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="167.0" text="Voornaam" fx:id="tcVoornaam" />
+                        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="165.0" text="Voornaam" fx:id="tcVoornaam" />
                         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="191.0" text="Achternaam" fx:id="tcAchternaam" />
                         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="136.0" text="Geboortedatum" fx:id="tcGeboortedatum" />
                         <TableColumn prefWidth="75.0" text="Geslacht" fx:id="tcGeslacht" />
