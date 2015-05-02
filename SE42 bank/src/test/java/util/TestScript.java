@@ -106,9 +106,11 @@ public class TestScript {
     /**
      * 1. Asserties: Equals (ID = -100) & NotEquals (ID = -100) & True (ID > 0)
      *    & NotEquals (ID = -100) & True (ID > 0)
-     * 2. -
-     * 3. -
-     * 4. -
+     * 2. Het ingegeven ID wordt niet in de database gezet, maar deze wordt gegenereerd.
+     * 3. Het account met een gegenereed ID wordt in de database gezet.
+     * 4. Bij de eerste persist wordt het ingegeven ID bewaard. Door de flush wordt
+     *    het ingegeven ID vervangen door een gegenereerd ID. Na de commit wordt
+     *    het account pas in de database weggeschreven.
      */
     @Test
     public void vraag3() {
@@ -125,15 +127,11 @@ public class TestScript {
         //nog niet in de database toegevoegd
         assertNotEquals(expected, account.getId());
         assertTrue(account.getId() > 0L);
-        AccountDAOJPAImpl impl = new AccountDAOJPAImpl(em);
-        assertEquals(0, impl.count());
         
         em.getTransaction().commit();
         //Account wordt aan de database toegevoegd
         assertNotEquals(expected, account.getId());
         assertTrue(account.getId() > 0L);
-        assertEquals(1, impl.count());
-
     }
     
     /**
