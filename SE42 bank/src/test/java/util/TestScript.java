@@ -5,6 +5,7 @@ package util;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import bank.dao.AccountDAOJPAImpl;
 import bank.domain.Account;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -60,7 +61,8 @@ public class TestScript {
      */
     
     /**
-     * 1. Null (ID) & True (ID > 1)
+     * 1. Asserties: Null (ID) & True (ID > 1)
+     *    Printline: ID = 17 (gegenereerde waarde)
      * 2. Geen
      * 3. Nieuw account toegevoegd met gegenereerd ID, afhankelijk van aantal keer
      *    aaroepen binnen de klasse Account.
@@ -82,10 +84,12 @@ public class TestScript {
     }
     
     /**
-     * 1. -
-     * 2. -
-     * 3. -
-     * 4. -
+     * 1. Asserties: Null (ID) & Equals (lengte lijst = 0)
+     * 2. Geen
+     * 3. Account is niet toegevoegd vanwege rollback. Tabel Account is in dit
+     *    geval leeg.
+     * 4. Door de rollback worden alle acties tussen begin en rollback niet uitgevoerd.
+     *    Account is niet toegevoegd, want alleen persist wordt aangeroepen (geen commit).
      */
     @Test
     public void vraag2() {
@@ -94,11 +98,14 @@ public class TestScript {
         em.persist(account);
         assertNull(account.getId());
         em.getTransaction().rollback();
-        // TODO code om te testen dat table account geen records bevat. Hint: bestudeer/gebruik AccountDAOJPAImpl
+        //Code om te testen dat table account geen records bevat. Hint: bestudeer/gebruik AccountDAOJPAImpl
+        AccountDAOJPAImpl impl = new AccountDAOJPAImpl(em);
+        assertEquals(0, impl.count());        
     }
     
     /**
-     * 1. -
+     * 1. Asserties: Equals (ID = -100) & NotEquals (ID = -100) & True (ID > 0)
+     *    & NotEquals (ID = -100) & True (ID > 0)
      * 2. -
      * 3. -
      * 4. -
@@ -110,17 +117,23 @@ public class TestScript {
         account.setId(expected);
         em.getTransaction().begin();
         em.persist(account);
-        //TODO: verklaar en pas eventueel aan
-        //assertNotEquals(expected, account.getId();
+        //Ingegeven ID blijft behouden, want ID is nog niet in database gegenereerd
+        assertEquals(expected, account.getId());
         em.flush();
-        //TODO: verklaar en pas eventueel aan
-        //assertEquals(expected, account.getId();
+        //Door flush wordt commando uitgevoerd, dus ook een ID gegenereerd, maar
+        //nog niet in de database toegevoegd
+        assertNotEquals(expected, account.getId());
+        assertTrue(account.getId() > 0L);
         em.getTransaction().commit();
-        //TODO: verklaar en pas eventueel aan
+        //Account wordt aan de database toegevoegd
+        assertNotEquals(expected, account.getId());
+        assertTrue(account.getId() > 0L);
+
     }
     
     /**
-     * 1. -
+     * 1. Asserties:
+     *    Printline:
      * 2. -
      * 3. -
      * 4. -
@@ -145,7 +158,8 @@ public class TestScript {
     }
     
     /**
-     * 1. -
+     * 1. Asserties: 
+     *    Printline:
      * 2. -
      * 3. -
      * 4. -
@@ -156,7 +170,8 @@ public class TestScript {
     }
     
     /**
-     * 1. -
+     * 1. Asserties: 
+     *    Printline:
      * 2. -
      * 3. -
      * 4. -
@@ -253,7 +268,8 @@ public class TestScript {
     }
     
     /**
-     * 1. -
+     * 1. Asserties: 
+     *    Printline:
      * 2. -
      * 3. -
      * 4. -
@@ -282,7 +298,8 @@ public class TestScript {
     }
     
     /**
-     * 1. -
+     * 1. Asserties: 
+     *    Printline:
      * 2. -
      * 3. -
      * 4. -
@@ -304,7 +321,8 @@ public class TestScript {
     }
     
     /**
-     * 1. -
+     * 1. Asserties: 
+     *    Printline:
      * 2. -
      * 3. -
      * 4. -
