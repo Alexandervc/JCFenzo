@@ -163,8 +163,7 @@ public class TestScript {
     }
     
     /**
-     * 1. Asserties: 
-     *    Printline:
+     * 1. Asserties:  
      * 2. -
      * 3. -
      * 4. -
@@ -176,6 +175,28 @@ public class TestScript {
         //Refresh vervolgens het andere object om de veranderde state uit de database te halen.
         //Test met asserties dat dit gelukt is.
         
+        Long expectedBalance = 400L;
+        Long expectedBalance2 = 600L;
+        Account account = new Account(114L);
+        em.getTransaction().begin();
+        em.persist(account);
+        account.setBalance(expectedBalance);
+        em.getTransaction().commit();
+      
+        Long acId = account.getId();
+        EntityManager em2 = emf.createEntityManager();
+        em2.getTransaction().begin();
+        Account found = em2.find(Account.class, acId);
+        
+        //Beide objecten verwijzen naar dezelfde regel in de database
+        //Door het ene object aan te passen en de wijzigingen weg te schrijven,
+        //wordt dit bij het andere object na een Refresh ook aangepast
+        account.setBalance(expectedBalance2);
+        em.getTransaction().begin();
+        em.persist(account);
+        em.getTransaction().commit();
+        em2.refresh(found);
+        assertEquals(found.getBalance(), expectedBalance2);
     }
     
     /**
