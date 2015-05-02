@@ -154,10 +154,10 @@ public class TestScript {
         Long balance3c = 333L;
         acc = new Account(3L);
         em.getTransaction().begin();
-        Account acc2 = em.merge(acc);
+        acc2 = em.merge(acc);
         assertTrue(em.contains(acc)); // verklaar
         assertTrue(em.contains(acc2)); // verklaar
-        assertEqual(acc,acc2);  //verklaar
+        assertEquals(acc,acc2);  //verklaar
         acc2.setBalance(balance3b);
         acc.setBalance(balance3c);
         em.getTransaction().commit();
@@ -189,7 +189,7 @@ public class TestScript {
         em.getTransaction().commit();
         em.close();
 
-        Find en clear
+        // Find en clear
         Account acc1 = new Account(77L);
         em.getTransaction().begin();
         em.persist(acc1);
