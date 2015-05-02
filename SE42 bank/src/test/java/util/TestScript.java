@@ -146,11 +146,13 @@ public class TestScript {
         Long expectedBalance = 400L;
         Account account = new Account(114L);
         em.getTransaction().begin();
-        em.persist(account);
         account.setBalance(expectedBalance);
+        em.persist(account);
+        
         em.getTransaction().commit();
-        assertEquals(expectedBalance, account.getBalance());
         //TODO: verklaar de waarde van account.getBalance
+        assertEquals(expectedBalance, account.getBalance());
+      
         Long acId = account.getId();
         account = null;
         EntityManager em2 = emf.createEntityManager();
