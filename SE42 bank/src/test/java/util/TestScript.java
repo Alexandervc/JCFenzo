@@ -52,17 +52,21 @@ public class TestScript {
     }
 
     /**
-     * 1. Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+     * 1. Wat is de waarde van asserties en printstatements? Corrigeer verkeerde 
+     *    asserties zodat de test ‘groen’ wordt.
      * 2. Welke SQL statements worden gegenereerd?
      * 3. Wat is het eindresultaat in de database?
      * 4. Verklaring van bovenstaande drie observaties.
      */
     
     /**
-     * 1. -
-     * 2. -
-     * 3. -
-     * 4. -
+     * 1. Null (ID) & True (ID > 1)
+     * 2. Geen
+     * 3. Nieuw account toegevoegd met gegenereerd ID, afhankelijk van aantal keer
+     *    aaroepen binnen de klasse Account.
+     * 4. Tijdens de transactie wordt het account nog niet weggeschreven. Pas na
+     *    de commit wordt er een ID gegenereerd en toegekend, en komt het account
+     *    in de database te staan.
      */
     @Test
     public void vraag1() {
