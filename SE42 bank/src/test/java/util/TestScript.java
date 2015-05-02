@@ -119,15 +119,20 @@ public class TestScript {
         em.persist(account);
         //Ingegeven ID blijft behouden, want ID is nog niet in database gegenereerd
         assertEquals(expected, account.getId());
+        
         em.flush();
         //Door flush wordt commando uitgevoerd, dus ook een ID gegenereerd, maar
         //nog niet in de database toegevoegd
         assertNotEquals(expected, account.getId());
         assertTrue(account.getId() > 0L);
+        AccountDAOJPAImpl impl = new AccountDAOJPAImpl(em);
+        assertEquals(0, impl.count());
+        
         em.getTransaction().commit();
         //Account wordt aan de database toegevoegd
         assertNotEquals(expected, account.getId());
         assertTrue(account.getId() > 0L);
+        assertEquals(1, impl.count());
 
     }
     
