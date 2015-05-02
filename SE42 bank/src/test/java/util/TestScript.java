@@ -51,19 +51,38 @@ public class TestScript {
     public void tearDown() {
     }
 
+    /**
+     * 1. Wat is de waarde van asserties en printstatements? Corrigeer verkeerde asserties zodat de test ‘groen’ wordt.
+     * 2. Welke SQL statements worden gegenereerd?
+     * 3. Wat is het eindresultaat in de database?
+     * 4. Verklaring van bovenstaande drie observaties.
+     */
+    
+    /**
+     * 1. -
+     * 2. -
+     * 3. -
+     * 4. -
+     */
     @Test
     public void vraag1() {
         Account account = new Account(111L);
         em.getTransaction().begin();
         em.persist(account);
-        //TODO: verklaar en pas eventueel aan
+        //ID is null omdat deze nog geen GeneratedValue heeft gekregen
         assertNull(account.getId());
         em.getTransaction().commit();
         System.out.println("AccountId: " + account.getId());
-        //TODO: verklaar en pas eventueel aan
+        //ID is groter dan 0, want ID is gegenereerd in database
         assertTrue(account.getId() > 0L);
     }
     
+    /**
+     * 1. -
+     * 2. -
+     * 3. -
+     * 4. -
+     */
     @Test
     public void vraag2() {
         Account account = new Account(111L);
@@ -74,6 +93,12 @@ public class TestScript {
         // TODO code om te testen dat table account geen records bevat. Hint: bestudeer/gebruik AccountDAOJPAImpl
     }
     
+    /**
+     * 1. -
+     * 2. -
+     * 3. -
+     * 4. -
+     */
     @Test
     public void vraag3() {
         Long expected = -100L;
@@ -90,6 +115,12 @@ public class TestScript {
         //TODO: verklaar en pas eventueel aan
     }
     
+    /**
+     * 1. -
+     * 2. -
+     * 3. -
+     * 4. -
+     */
     @Test
     public void vraag4() {
         Long expectedBalance = 400L;
@@ -109,11 +140,23 @@ public class TestScript {
         assertEquals(expectedBalance, found.getBalance());
     }
     
+    /**
+     * 1. -
+     * 2. -
+     * 3. -
+     * 4. -
+     */
     @Test
     public void vraag5() {
         //TODO
     }
     
+    /**
+     * 1. -
+     * 2. -
+     * 3. -
+     * 4. -
+     */
     @Test
     public void vraag6() {
         Account acc = new Account(1L);
@@ -205,6 +248,12 @@ public class TestScript {
         //TODO verklaar verschil tussen beide scenario's
     }
     
+    /**
+     * 1. -
+     * 2. -
+     * 3. -
+     * 4. -
+     */
     @Test
     public void vraag7() {
         Account acc1 = new Account(77L);
@@ -228,6 +277,12 @@ public class TestScript {
         //TODO verklaar verschil tussen beide scenario's
     }
     
+    /**
+     * 1. -
+     * 2. -
+     * 3. -
+     * 4. -
+     */
     @Test
     public void vraag8() {
         Account acc1 = new Account(88L);
@@ -244,6 +299,12 @@ public class TestScript {
         //TODO: verklaar bovenstaande asserts
     }
     
+    /**
+     * 1. -
+     * 2. -
+     * 3. -
+     * 4. -
+     */
     @Test
     public void vraag9() {
         //TODO
