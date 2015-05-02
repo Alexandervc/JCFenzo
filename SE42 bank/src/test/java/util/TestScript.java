@@ -163,10 +163,11 @@ public class TestScript {
     }
     
     /**
-     * 1. Asserties:  
-     * 2. -
-     * 3. -
-     * 4. -
+     * 1. Asserties: vraag 4 + Equals (balance = 600)
+     * 2. Geen
+     * 3. Balance van account is aangepast naar 600.
+     * 4. Als je het ene object aanpast, dan wordt het andere object ook aangepast.
+     *    Ze verwijzen naar dezelfde regel.
      */
     @Test
     public void vraag5() {
