@@ -339,11 +339,9 @@ public class TestScript {
     }
     
     /**
-     * 1. Asserties: 
-     *    Printline:
-     * 2. -
-     * 3. -
-     * 4. -
+     * 4. De clear zorgt ervoor dat de persistence context leeggemaakt wordt.
+     *    Find zoekt het object in de persistence context en als hij deze niet kan
+     *    vinden wordt het object vanuit de database in de persistence context gezet.
      */
     @Test
     public void vraag7() {
@@ -380,21 +378,21 @@ public class TestScript {
      * 3. -
      * 4. -
      */
-//    @Test
-//    public void vraag8() {
-//        Account acc1 = new Account(88L);
-//        em.getTransaction().begin();
-//        em.persist(acc1);
-//        em.getTransaction().commit();
-//        Long id = acc1.getId();
-//        //Database bevat nu een account.
-//
-//        em.remove(acc1);
-//        assertEquals(id, acc1.getId());        
-//        Account accFound = em.find(Account.class, id);
-//        assertNull(accFound);
-//        //TODO: verklaar bovenstaande asserts
-//    }
+    @Test
+    public void vraag8() {
+        Account acc1 = new Account(88L);
+        em.getTransaction().begin();
+        em.persist(acc1);
+        em.getTransaction().commit();
+        Long id = acc1.getId();
+        //Database bevat nu een account.
+
+        em.remove(acc1);
+        assertEquals(id, acc1.getId());        
+        Account accFound = em.find(Account.class, id);
+        assertNull(accFound);
+        //TODO: verklaar bovenstaande asserts
+    }
     
     /**
      * 1. Asserties: 
