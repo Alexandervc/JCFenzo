@@ -368,15 +368,12 @@ public class TestScript {
         //bestaat dit object niet meer in de persistence context en
         //moet het opnieuw aangemaakt worden.
         //Hierdoor verwijzen accF1 en accF2 niet naar hetzelfde object.
-        assertSame(accF1, accF2);
+        assertNotSame(accF1, accF2);
     }
     
     /**
-     * 1. Asserties: 
-     *    Printline:
-     * 2. -
-     * 3. -
-     * 4. -
+     * 4. Door remove wordt het object uit de database en de persistence context
+     *    verwijderd, maar het object blijft wel lokaal bestaan.
      */
     @Test
     public void vraag8() {
@@ -384,14 +381,17 @@ public class TestScript {
         em.getTransaction().begin();
         em.persist(acc1);
         em.getTransaction().commit();
+        //Gegenereerde ID wordt teruggegeven.
         Long id = acc1.getId();
         //Database bevat nu een account.
 
         em.remove(acc1);
+        //Acc1 wordt uit de database en de persistence context verwijderd,
+        //maar acc1 blijft lokaal wel bestaan.
         assertEquals(id, acc1.getId());        
         Account accFound = em.find(Account.class, id);
+        //Account bestaat niet meer in database.
         assertNull(accFound);
-        //TODO: verklaar bovenstaande asserts
     }
     
     /**
