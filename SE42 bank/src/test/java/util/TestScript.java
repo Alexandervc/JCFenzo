@@ -5,6 +5,7 @@ package util;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import bank.dao.AccountDAO;
 import bank.dao.AccountDAOJPAImpl;
 import bank.domain.Account;
 import java.sql.SQLException;
@@ -235,12 +236,21 @@ public class TestScript {
         em.getTransaction().begin();
         acc9 = em.merge(acc);
         acc.setBalance(balance2a);
+        //Balance van acc is gewijzigd, balance van acc9 is niet gewijzigd
+        assertNotEquals(acc.getBalance(), acc9.getBalance());
+        assertEquals(acc.getBalance(), balance2a);
         acc9.setBalance(balance2a+balance2a);
+        //Balance van acc9 is gewijzigd, balance van acc is niet gewijzigd
+        assertEquals(acc9.getBalance(), Long.valueOf(balance2a + balance2a));
+        assertEquals(acc.getBalance(), balance2a);
         em.getTransaction().commit();
-        //TODO: voeg asserties toe om je verwachte waarde van de attributen te verifiëren.
-        //TODO: doe dit zowel voor de bovenstaande java objecten als voor opnieuw bij de entitymanager opgevraagde objecten met overeenkomstig Id. 
-        // HINT: gebruik acccountDAO.findByAccountNr
-
+        //Beide accs houden hun eigen balance
+        assertEquals(acc9.getBalance(), Long.valueOf(balance2a + balance2a));
+        assertEquals(acc.getBalance(), balance2a);
+        // Balance van acc in de database is gelijk aan die van acc9
+        AccountDAO accountDAO = new AccountDAOJPAImpl(em);
+        Account found2 = accountDAO.findByAccountNr(acc9.getAccountNr());
+        assertEquals(found2.getBalance(), acc9.getBalance());
 
         // scenario 3
         Long balance3b = 322L;
@@ -248,20 +258,39 @@ public class TestScript {
         acc = new Account(3L);
         em.getTransaction().begin();
         acc2 = em.merge(acc);
-        assertTrue(em.contains(acc)); // verklaar
-        assertTrue(em.contains(acc2)); // verklaar
-        assertEquals(acc,acc2);  //verklaar
+        //acc is niet gekoppeld aan het object in de persistence context
+        //dus contains geeft false
+        assertFalse(em.contains(acc));
+        //acc2 is wel gekoppeld aan het object in de persistence context
+        //dus contains geeft true
+        assertTrue(em.contains(acc2));
+        //acc en acc2 verwijzen niet naar hetzelfde object,
+        //maar acc2 is een kopie van acc, dus het id is wel gelijk
+        assertNotEquals(acc,acc2);
+        assertEquals(acc.getId(), acc2.getId());
         acc2.setBalance(balance3b);
+        //balance van acc2 is gewijzigd naar balance3b,
+        //balance van acc is niet gewijzigd naar balance3b
+        assertEquals(acc2.getBalance(), balance3b);
+        assertNotEquals(acc.getBalance(), balance3b);
         acc.setBalance(balance3c);
+        //balance van acc2 is nog gelijk aan balance3b,
+        //balance van acc is gewijzigd naar balance3c
+        assertEquals(acc2.getBalance(), balance3b);
+        assertEquals(acc.getBalance(), balance3c);
         em.getTransaction().commit();
-        //TODO: voeg asserties toe om je verwachte waarde van de attributen te verifiëren.
-        //TODO: doe dit zowel voor de bovenstaande java objecten als voor opnieuw bij de entitymanager opgevraagde objecten met overeenkomstig Id.
-
+        //beide accs houden hun eigen balance
+        assertEquals(acc2.getBalance(), balance3b);
+        assertEquals(acc.getBalance(), balance3c);
+        //acc in de database heeft dezelfde balance als acc2 (balance3b),
+        //omdat acc2 gekoppeld is in de persistence context
+        found2 = accountDAO.findByAccountNr(acc.getAccountNr());
+        assertEquals(found2.getBalance(), balance3b);
 
         // scenario 4
         Account account = new Account(114L);
         account.setBalance(450L);
-        EntityManager em = emf.createEntityManager();
+        em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(account);
         em.getTransaction().commit();
@@ -269,21 +298,38 @@ public class TestScript {
         Account account2 = new Account(114L);
         Account tweedeAccountObject = account2;
         tweedeAccountObject.setBalance(650l);
-        assertEquals((Long)650L,account2.getBalance());  //verklaar
+        //account2 en tweedeAccountObject zijn een referentie naar hetzelfde object,
+        //dus als de balance van tweedeAccountObject aangepast wordt, wordt die 
+        //van account2 ook aangepast
+        assertEquals((Long)650L,account2.getBalance());
         account2.setId(account.getId());
         em.getTransaction().begin();
         account2 = em.merge(account2);
-        assertSame(account,account2);  //verklaar
-        assertTrue(em.contains(account2));  //verklaar
-        assertFalse(em.contains(tweedeAccountObject));  //verklaar
+        //Merge zoekt binnen de persistence context naar een object met hetzelfde id
+        //account zit al in de persistence context en heeft hetzelfde id,
+        //dus account2 krijgt een koppeling naar de persistence context van account
+        //account en account2 verwijzen daarna naar hetzelfde object
+        assertSame(account,account2);
+        //doordat de koppeling naar de persistence context wordt weggeschreven in account2
+        //bevat de entitymanager account en account2
+        assertTrue(em.contains(account));
+        assertTrue(em.contains(account2));
+        //account2 en tweedeAccountObject verwijzen niet meer naar hetzelfde object,
+        //want account2 verwijst nu naar hetzelfde object als account,
+        //dus de entitymanager bevat tweedeAccountObject niet
+        assertFalse(em.contains(tweedeAccountObject));
         tweedeAccountObject.setBalance(850l);
-        assertEquals((Long)650L,account.getBalance());  //verklaar
-        assertEquals((Long)650L,account2.getBalance());  //verklaar
+        //account2 en tweedeAccountObject verwijzen niet meer naar hetzelfde object,
+        //want account2 verwijst nu naar hetzelfde object als account,
+        //dus een wijziging in tweedeAccount wordt niet doorgevoerd bij account2
+        assertEquals((Long)650L,account.getBalance());
+        assertEquals((Long)650L,account2.getBalance());
         em.getTransaction().commit();
         em.close();
 
         // Find en clear
         Account acc1 = new Account(77L);
+        em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(acc1);
         em.getTransaction().commit();
@@ -294,14 +340,19 @@ public class TestScript {
         Account accF2;
         accF1 = em.find(Account.class, acc1.getId());
         accF2 = em.find(Account.class, acc1.getId());
+        //Verwijzen naar hetzelfde object in de database
         assertSame(accF1, accF2);
 
         // scenario 2        
         accF1 = em.find(Account.class, acc1.getId());
         em.clear();
         accF2 = em.find(Account.class, acc1.getId());
-        assertSame(accF1, accF2);
-        //TODO verklaar verschil tussen beide scenario's
+        //em.clear() gooit de persistence context leeg
+        //bij het zoeken naar een object met het id van acc1 (bij accF2)
+        //bestaat dit object niet meer in de persistence context en
+        //moet het opnieuw aangemaakt worden
+        //hierdoor verwijzen accF1 en accF2 niet naar hetzelfde object
+        assertNotSame(accF1, accF2);
     }
     
     /**
