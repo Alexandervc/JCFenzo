@@ -394,18 +394,17 @@ public class TestScript {
         assertNull(accFound);
     }
     
-    /**
-     * 1. Asserties: 
-     *    Printline:
-     * 2. -
-     * 3. -
-     * 4. -
-     */
     @Test
     public void vraag9() {
         //Opgave 1 heb je uitgevoerd met @GeneratedValue(strategy = GenerationType.IDENTITY)
         //Voer dezelfde opdracht nu uit met GenerationType SEQUENCE en TABLE.
         //Verklaar zowel de verschillen in testresultaat als verschillen van de database structuur.
         
+        //IDENTITY gebruikt een identity-kolom om het id te genereren, alle tests slagen
+        //SEQUENCE gebruikt een sequence voor het genereren van het id,
+        //hiervoor wordt een aparte tabel aangemaakt, alle tests slagen
+        //TABLE gebruikt een aparte tabel met unieke waardes om het id te genereren,
+        //deze tabel wordt niet automatisch aangemaakt, waardoor de tests vast blijven hangen
+        //er is namelijk geen id op te halen
     }
 }
