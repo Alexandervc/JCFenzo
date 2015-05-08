@@ -1,11 +1,10 @@
 package auction.service;
 
-import java.util.List;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import auction.domain.User;
-import javax.persistence.*;
+import java.util.List;
 
 public class JPARegistrationMgrTest {
     
@@ -18,6 +17,8 @@ public class JPARegistrationMgrTest {
 
     @Test
     public void registerUser() {
+        registrationMgr.cleanDatabase();
+        
         User user1 = registrationMgr.registerUser("xxx1@yyy");
         assertTrue(user1.getEmail().equals("xxx1@yyy"));
         User user2 = registrationMgr.registerUser("xxx2@yyy2");
@@ -30,6 +31,8 @@ public class JPARegistrationMgrTest {
 
     @Test
     public void getUser() {
+        registrationMgr.cleanDatabase();
+        
         User user1 = registrationMgr.registerUser("xxx5@yyy5");
         User userGet = registrationMgr.getUser("xxx5@yyy5");
         assertSame(userGet, user1);
@@ -40,6 +43,8 @@ public class JPARegistrationMgrTest {
 
     @Test
     public void getUsers() {
+        registrationMgr.cleanDatabase();
+        
         List<User> users = registrationMgr.getUsers();
         assertEquals(0, users.size());
 

@@ -7,13 +7,34 @@ import auction.dao.UserDAOJPAImpl;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.metamodel.EntityType;
 
 public class JPARegistrationMgr {
 
     private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU");
+    private EntityManager em;
     private UserDAO userDAO;
+    
+    private static final Class<?>[] ENTITY_TYPES = {
+        User.class
+    };
 
-    public JPARegistrationMgr() {        
+    public JPARegistrationMgr() {      
+    }
+    
+    public void cleanDatabase() {
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        for (Class<?> entityType : ENTITY_TYPES) {
+            EntityType et = em.getMetamodel().entity(entityType);
+            if (et != null) {
+                em.createQuery("delete from " + et.getName()).executeUpdate();
+            }
+        }
+        
+        em.getTransaction().commit();
+        em.close();
     }
 
     /**
@@ -25,7 +46,7 @@ public class JPARegistrationMgr {
      * onjuist is ( het bevat geen '@'-teken) wordt null teruggegeven.
      */
     public User registerUser(String email) {
-        EntityManager em = emf.createEntityManager();
+        em = emf.createEntityManager();
         userDAO = new UserDAOJPAImpl(em);
         
         if (!email.contains("@")) {
@@ -60,7 +81,7 @@ public class JPARegistrationMgr {
      * e-mailadres of null als zo'n User niet bestaat.
      */
     public User getUser(String email) {
-        EntityManager em = emf.createEntityManager();
+        em = emf.createEntityManager();
         userDAO = new UserDAOJPAImpl(em);
         
         User user = null;
@@ -83,7 +104,7 @@ public class JPARegistrationMgr {
      * @return Een iterator over alle geregistreerde gebruikers
      */
     public List<User> getUsers() {
-        EntityManager em = emf.createEntityManager();
+        em = emf.createEntityManager();
         userDAO = new UserDAOJPAImpl(em);
         
         List<User> users = null;
