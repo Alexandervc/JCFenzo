@@ -9,11 +9,11 @@ import javax.persistence.*;
 
 public class JPARegistrationMgrTest {
     
-    private RegistrationMgr registrationMgr;
+    private JPARegistrationMgr registrationMgr;
 
     @Before
     public void setUp() throws Exception {
-        registrationMgr = new RegistrationMgr();
+        registrationMgr = new JPARegistrationMgr();
     }
 
     @Test
