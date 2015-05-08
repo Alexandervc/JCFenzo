@@ -39,8 +39,16 @@ public class UserDAOJPAImpl implements UserDAO {
     @Override
     public User findByEmail(String email) {
         Query q = em.createNamedQuery("User.findByEmail", User.class);
-        q.setParameter("email", email);
-        return (User) q.getSingleResult();
+        q.setParameter("email", email);   
+        User user = null;
+        
+        try {
+        user = (User) q.getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }      
+        
+        return user;
     }
 
     @Override
