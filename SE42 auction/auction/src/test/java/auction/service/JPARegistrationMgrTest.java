@@ -5,9 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import auction.domain.User;
+import javax.persistence.*;
 
-public class RegistrationMgrTest {
-
+public class JPARegistrationMgrTest {
+    
     private RegistrationMgr registrationMgr;
 
     @Before
@@ -46,7 +47,6 @@ public class RegistrationMgrTest {
         users = registrationMgr.getUsers();
         assertEquals(1, users.size());
         assertSame(users.get(0), user1);
-
 
         User user2 = registrationMgr.registerUser("xxx9@yyy");
         users = registrationMgr.getUsers();
