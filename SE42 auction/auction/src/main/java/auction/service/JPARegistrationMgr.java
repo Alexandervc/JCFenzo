@@ -57,12 +57,12 @@ public class JPARegistrationMgr {
         em.getTransaction().begin();
         
         try {
-            user = userDAO.findByEmail(email);            
+            user = userDAO.findByEmail(email);  
             if (user != null) {
                 return user;
             }
             user = new User(email);
-            userDAO.create(user);
+            userDAO.create(user);            
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();

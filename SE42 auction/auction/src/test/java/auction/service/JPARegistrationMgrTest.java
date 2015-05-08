@@ -24,7 +24,10 @@ public class JPARegistrationMgrTest {
         User user2 = registrationMgr.registerUser("xxx2@yyy2");
         assertTrue(user2.getEmail().equals("xxx2@yyy2"));
         User user2bis = registrationMgr.registerUser("xxx2@yyy2");
-        assertSame(user2bis, user2);
+        //Verwijzing naar object is niet gelijk, maar waardes wel.
+        //Id is uniek en wordt in database gegenereerd,
+        //dus hetzelfde id betekent hetzelfde object.
+        assertSame(user2bis.getId(), user2.getId());
         //geen @ in het adres
         assertNull(registrationMgr.registerUser("abc"));
     }
@@ -35,7 +38,10 @@ public class JPARegistrationMgrTest {
         
         User user1 = registrationMgr.registerUser("xxx5@yyy5");
         User userGet = registrationMgr.getUser("xxx5@yyy5");
-        assertSame(userGet, user1);
+        //Verwijzing naar object is niet gelijk, maar waardes wel.
+        //Id is uniek en wordt in database gegenereerd,
+        //dus hetzelfde id betekent hetzelfde object.
+        assertSame(userGet.getId(), user1.getId());
         assertNull(registrationMgr.getUser("aaa4@bb5"));
         registrationMgr.registerUser("abc");
         assertNull(registrationMgr.getUser("abc"));
@@ -51,7 +57,10 @@ public class JPARegistrationMgrTest {
         User user1 = registrationMgr.registerUser("xxx8@yyy");
         users = registrationMgr.getUsers();
         assertEquals(1, users.size());
-        assertSame(users.get(0), user1);
+        //Verwijzing naar object is niet gelijk, maar waardes wel.
+        //Id is uniek en wordt in database gegenereerd,
+        //dus hetzelfde id betekent hetzelfde object.
+        assertSame(users.get(0).getId(), user1.getId());
 
         User user2 = registrationMgr.registerUser("xxx9@yyy");
         users = registrationMgr.getUsers();

@@ -43,7 +43,7 @@ public class UserDAOJPAImpl implements UserDAO {
         User user = null;
         
         try {
-        user = (User) q.getSingleResult();
+            user = (User) q.getSingleResult();
         } catch (NoResultException ex) {
             return null;
         }      
