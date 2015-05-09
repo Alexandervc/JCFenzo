@@ -2,12 +2,8 @@ package util;
 
 import bank.domain.Account;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.EntityType;
-import static org.junit.Assert.*;
-import org.junit.*;
 
 public class DatabaseCleaner {
 

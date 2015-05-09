@@ -9,16 +9,18 @@ import java.util.List;
 public class JPARegistrationMgrTest {
     
     private JPARegistrationMgr registrationMgr;
+    
+    public JPARegistrationMgrTest() {
+        registrationMgr = new JPARegistrationMgr();
+    }
 
     @Before
     public void setUp() throws Exception {
-        registrationMgr = new JPARegistrationMgr();
+        registrationMgr.cleanDatabase();
     }
 
     @Test
     public void registerUser() {
-        registrationMgr.cleanDatabase();
-        
         User user1 = registrationMgr.registerUser("xxx1@yyy");
         assertTrue(user1.getEmail().equals("xxx1@yyy"));
         User user2 = registrationMgr.registerUser("xxx2@yyy2");
@@ -27,19 +29,17 @@ public class JPARegistrationMgrTest {
         //Verwijzing naar object is niet gelijk, maar waardes wel.
         //Id is uniek en wordt in database gegenereerd,
         //dus hetzelfde id betekent hetzelfde object.
-        assertSame(user2bis.getId(), user2.getId());
+        assertEquals(user2bis.getId(), user2.getId());
         //geen @ in het adres
         assertNull(registrationMgr.registerUser("abc"));
     }
 
     @Test
     public void getUser() {
-        registrationMgr.cleanDatabase();
-        
         User user1 = registrationMgr.registerUser("xxx5@yyy5");
         User userGet = registrationMgr.getUser("xxx5@yyy5");
         //Gegenereerd Id verwijst naar hetzelfde object in database.
-        assertSame(userGet.getId(), user1.getId());
+        assertEquals(userGet.getId(), user1.getId());
         assertNull(registrationMgr.getUser("aaa4@bb5"));
         registrationMgr.registerUser("abc");
         assertNull(registrationMgr.getUser("abc"));
@@ -47,8 +47,6 @@ public class JPARegistrationMgrTest {
 
     @Test
     public void getUsers() {
-        registrationMgr.cleanDatabase();
-        
         List<User> users = registrationMgr.getUsers();
         assertEquals(0, users.size());
 
@@ -56,7 +54,7 @@ public class JPARegistrationMgrTest {
         users = registrationMgr.getUsers();
         assertEquals(1, users.size());
         //Gegenereerd Id verwijst naar hetzelfde object in database.
-        assertSame(users.get(0).getId(), user1.getId());
+        assertEquals(users.get(0).getId(), user1.getId());
 
         User user2 = registrationMgr.registerUser("xxx9@yyy");
         users = registrationMgr.getUsers();

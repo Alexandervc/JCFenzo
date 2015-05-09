@@ -15,7 +15,7 @@ public class UserDAOJPAImpl implements UserDAO {
 
     @Override
     public int count() {
-        Query q = em.createNamedQuery("User.count", User.class);
+        Query q = em.createNamedQuery("User.count");
         return ((Long) q.getSingleResult()).intValue();
     }
 
@@ -31,19 +31,18 @@ public class UserDAOJPAImpl implements UserDAO {
 
     @Override
     public List<User> findAll() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(User.class));
-        return em.createQuery(cq).getResultList();
+        Query q = em.createNamedQuery("User.getAll");
+        return (List<User>) q.getResultList();
     }
 
     @Override
     public User findByEmail(String email) {
-        Query q = em.createNamedQuery("User.findByEmail", User.class);
+        TypedQuery<User> q = em.createNamedQuery("User.findByEmail", User.class);
         q.setParameter("email", email);   
         User user = null;
         
         try {
-            user = (User) q.getSingleResult();
+            user = q.getSingleResult();
         } catch (NoResultException ex) {
             return null;
         }      

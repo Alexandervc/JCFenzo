@@ -1,6 +1,5 @@
 package auction.domain;
 
-import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
@@ -9,10 +8,10 @@ import javax.persistence.*;
     @NamedQuery(name = "User.count", query = "select count(u) from User as u"),
     @NamedQuery(name = "User.findByEmail", query = "select u from User as u where u.email = :email")
 })
-public class User implements Serializable {
+public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long Id;
     @Column(unique = true)
     private String email;
