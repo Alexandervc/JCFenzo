@@ -8,10 +8,10 @@ import java.util.List;
 import javax.persistence.*;
 
 public class AuctionMgr  {
-    private EntityManagerFactory emf;
+    private ItemDAO itemDAO;
     
     public AuctionMgr() {
-        emf = Persistence.createEntityManagerFactory("auctionPU");
+        itemDAO = new ItemDAOJPAImpl();
     }
 
    /**
@@ -20,9 +20,6 @@ public class AuctionMgr  {
      *         geretourneerd
      */
     public Item getItem(Long id) {
-        EntityManager em = emf.createEntityManager();
-        ItemDAO itemDAO = new ItemDAOJPAImpl(em);
-        
         em.getTransaction().begin();
         Item item = null;
         
@@ -44,10 +41,7 @@ public class AuctionMgr  {
      * @param description
      * @return een lijst met items met @desciption. Eventueel lege lijst.
      */
-    public List<Item> findItemByDescription(String description) {
-        EntityManager em = emf.createEntityManager();
-        ItemDAO itemDAO = new ItemDAOJPAImpl(em);
-        
+    public List<Item> findItemByDescription(String description) {        
         em.getTransaction().begin();
         List<Item> items = new ArrayList<>();
         
@@ -72,9 +66,6 @@ public class AuctionMgr  {
      *         amount niet hoger was dan het laatste bod, dan null
      */
     public Bid newBid(Item item, User buyer, Money amount) {
-        EntityManager em = emf.createEntityManager();
-        ItemDAO itemDAO = new ItemDAOJPAImpl(em);
-        
         //??
         Bid bid = item.newBid(buyer, amount);
         
