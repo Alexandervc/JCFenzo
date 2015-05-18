@@ -1,12 +1,9 @@
 package auction.service;
 
 import static org.junit.Assert.*;
-
 import nl.fontys.util.Money;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import auction.domain.Bid;
 import auction.domain.Category;
 import auction.domain.Item;
@@ -32,6 +29,7 @@ public class AuctionMgrTest {
         EntityManager em = emf.createEntityManager();
         DatabaseCleaner dbCleaner = new DatabaseCleaner(em);
         dbCleaner.clean();
+        
         registrationMgr = new RegistrationMgr();
         auctionMgr = new AuctionMgr();
         sellerMgr = new SellerMgr();
@@ -39,7 +37,6 @@ public class AuctionMgrTest {
 
     @Test
     public void getItem() {
-
         String email = "xx2@nl";
         String omsch = "omsch";
 
@@ -74,7 +71,6 @@ public class AuctionMgrTest {
 
     @Test
     public void newBid() {
-
         String email = "ss2@nl";
         String emailb = "bb@nl";
         String emailb2 = "bb2@nl";

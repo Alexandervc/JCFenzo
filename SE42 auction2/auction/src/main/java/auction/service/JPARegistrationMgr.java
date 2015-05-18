@@ -4,10 +4,6 @@ import java.util.*;
 import auction.domain.User;
 import auction.dao.UserDAO;
 import auction.dao.UserDAOJPAImpl;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.metamodel.EntityType;
 
 public class JPARegistrationMgr {
 

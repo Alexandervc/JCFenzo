@@ -1,14 +1,9 @@
 package auction.service;
 
 import static org.junit.Assert.*;
-
 import nl.fontys.util.Money;
-
 import org.junit.Before;
 import org.junit.Test;
-
-
-
 import auction.domain.Category;
 import auction.domain.Item;
 import auction.domain.User;
@@ -24,7 +19,7 @@ public class SellerMgrTest {
     private EntityManagerFactory emf;
     
     public SellerMgrTest() {
-        emf = Persistence.createEntityManagerFactory("autionPU");
+        emf = Persistence.createEntityManagerFactory("auctionPU");
     }
 
     @Before
@@ -32,6 +27,7 @@ public class SellerMgrTest {
         EntityManager em = emf.createEntityManager();
         DatabaseCleaner dbCleaner = new DatabaseCleaner(em);
         dbCleaner.clean();
+        
         registrationMgr = new RegistrationMgr();
         auctionMgr = new AuctionMgr();
         sellerMgr = new SellerMgr();

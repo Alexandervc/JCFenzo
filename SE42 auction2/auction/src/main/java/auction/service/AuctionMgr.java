@@ -3,9 +3,7 @@ package auction.service;
 import auction.dao.*;
 import nl.fontys.util.Money;
 import auction.domain.*;
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
 
 public class AuctionMgr  {
     
