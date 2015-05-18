@@ -21,7 +21,7 @@ public class Item implements Comparable {
     private Category category;
     private String description;
     
-    @OneToOne
+    @OneToOne (cascade = CascadeType.ALL)
     private Bid highest;
     
     public Item() { }

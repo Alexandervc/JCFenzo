@@ -8,10 +8,11 @@ import java.util.List;
 import javax.persistence.*;
 
 public class AuctionMgr  {
-    private EntityManagerFactory emf;
+    
+    private ItemDAO itemDAO;
     
     public AuctionMgr() {
-        emf = Persistence.createEntityManagerFactory("auctionPU");
+        itemDAO = new ItemDAOJPAImpl();   
     }
 
    /**
@@ -19,24 +20,8 @@ public class AuctionMgr  {
      * @return het item met deze id; als dit item niet bekend is wordt er null
      *         geretourneerd
      */
-    public Item getItem(Long id) {
-        EntityManager em = emf.createEntityManager();
-        ItemDAO itemDAO = new ItemDAOJPAImpl(em);
-        
-        em.getTransaction().begin();
-        Item item = null;
-        
-        try {
-            item = itemDAO.find(id);
-            em.getTransaction().commit();
-        } catch(Exception ex) {
-            ex.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-        
-        return item;
+    public Item getItem(Long id) {             
+        return itemDAO.find(id);
     }
 
   
@@ -45,23 +30,7 @@ public class AuctionMgr  {
      * @return een lijst met items met @desciption. Eventueel lege lijst.
      */
     public List<Item> findItemByDescription(String description) {
-        EntityManager em = emf.createEntityManager();
-        ItemDAO itemDAO = new ItemDAOJPAImpl(em);
-        
-        em.getTransaction().begin();
-        List<Item> items = new ArrayList<>();
-        
-        try {
-            items = itemDAO.findByDescription(description);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            em.getTransaction().rollback();
-        } finally {
-            em.close();
-        }
-        
-        return items;
+        return itemDAO.findByDescription(description);
     }
 
     /**
@@ -71,25 +40,11 @@ public class AuctionMgr  {
      * @return het nieuwe bod ter hoogte van amount op item door buyer, tenzij
      *         amount niet hoger was dan het laatste bod, dan null
      */
-    public Bid newBid(Item item, User buyer, Money amount) {
-        EntityManager em = emf.createEntityManager();
-        ItemDAO itemDAO = new ItemDAOJPAImpl(em);
-        
-        //??
+    public Bid newBid(Item item, User buyer, Money amount) {      
         Bid bid = item.newBid(buyer, amount);
         
-        if(bid == null) {
-            em.getTransaction().begin();
-            
-            try {
-                itemDAO.edit(item);
-                em.getTransaction().commit();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                em.getTransaction().rollback();
-            } finally {
-                em.close();
-            }
+        if(bid != null) {
+            itemDAO.edit(item);
         }
         
         return bid;

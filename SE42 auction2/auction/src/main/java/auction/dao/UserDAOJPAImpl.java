@@ -6,51 +6,125 @@ import javax.persistence.*;
 
 public class UserDAOJPAImpl implements UserDAO {
 
-    private final EntityManager em;
+    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU");
+    private EntityManager em;
 
-    public UserDAOJPAImpl(EntityManager em) {
-        this.em = em;
+    public UserDAOJPAImpl() {
+        em = emf.createEntityManager();
     }
 
     @Override
     public int count() {
-        Query q = em.createNamedQuery("User.count");
-        return ((Long) q.getSingleResult()).intValue();
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        
+        Query q = null;
+        int i = 0;
+        
+        try {
+            q = em.createNamedQuery("User.count");
+            i = (int)q.getSingleResult();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        } 
+
+        return i;
     }
 
     @Override
     public void create(User user) {
-        em.persist(user);
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        
+        try {
+            em.persist(user);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }        
     }
 
     @Override
     public void edit(User user) {
-        em.merge(user);
+        em = emf.createEntityManager();        
+        em.getTransaction().begin();
+        
+        try {
+            em.merge(user);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }        
     }
 
     @Override
     public List<User> findAll() {
-        Query q = em.createNamedQuery("User.getAll");
-        return (List<User>) q.getResultList();
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        
+        Query q = null;
+        List<User> users = null;
+        
+        try {
+            q = em.createNamedQuery("User.getAll");
+            users = (List<User>) q.getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+        
+        return users;
     }
 
     @Override
     public User findByEmail(String email) {
-        TypedQuery<User> q = em.createNamedQuery("User.findByEmail", User.class);
-        q.setParameter("email", email);   
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        
+        TypedQuery<User> q = null;
         User user = null;
         
         try {
+            q = em.createNamedQuery("User.findByEmail", User.class);
+            q.setParameter("email", email);
             user = q.getSingleResult();
-        } catch (NoResultException ex) {
-            return null;
-        }      
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }    
         
         return user;
     }
 
     @Override
     public void remove(User user) {
-        em.remove(em.merge(user));
+        em = emf.createEntityManager();
+        em.getTransaction().begin();
+        
+        try {
+            em.remove(em.merge(user));
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }         
     }
 }
