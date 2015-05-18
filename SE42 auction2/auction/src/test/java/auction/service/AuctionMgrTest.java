@@ -1,12 +1,9 @@
 package auction.service;
 
 import static org.junit.Assert.*;
-
 import nl.fontys.util.Money;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import auction.domain.Bid;
 import auction.domain.Category;
 import auction.domain.Item;
