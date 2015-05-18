@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 public class UserDAOJPAImpl implements UserDAO {
 
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU");
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU");
     private EntityManager em;
 
     public UserDAOJPAImpl() {

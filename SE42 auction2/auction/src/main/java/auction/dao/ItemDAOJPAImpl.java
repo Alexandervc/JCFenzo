@@ -15,7 +15,7 @@ import javax.persistence.*;
  */
 public class ItemDAOJPAImpl implements ItemDAO {
     
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU");
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU");
     private EntityManager em;
     
     public ItemDAOJPAImpl() {

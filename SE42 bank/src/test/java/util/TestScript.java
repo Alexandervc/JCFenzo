@@ -204,7 +204,7 @@ public class TestScript {
     /**
      * 4. Door het uitvoeren van een merge wordt er eerst gezocht naar een object
      *    in de persistence context met hetzelfde ID. Als deze aanwezig is, wordt
-     *    het gevonden object teruggegeven. Als deze niet niet aanwezig is, wordt
+     *    het gevonden object teruggegeven. Als deze niet aanwezig is, wordt
      *    het meegegeven object in de persistence context gezet en teruggegeven.
      */
     @Test
@@ -369,6 +369,8 @@ public class TestScript {
         //moet het opnieuw aangemaakt worden.
         //Hierdoor verwijzen accF1 en accF2 niet naar hetzelfde object.
         assertNotSame(accF1, accF2);
+        assertNotEquals(accF1, accF2);
+        assertEquals(accF1.getId(), accF2.getId());
     }
     
     /**
@@ -407,4 +409,56 @@ public class TestScript {
         //deze tabel wordt niet automatisch aangemaakt, waardoor de tests vast blijven hangen
         //er is namelijk geen id op te halen
     }
+    
+    @Test
+    public void test1() {
+	Account account = new Account(111L);
+	em.getTransaction().begin();
+
+	em.persist(account);
+	assertNull(account.getId());
+	em.getTransaction().commit();
+
+	assertTrue(account.getId() > 0L);
+    }
+    
+    @Test
+    public void test2() {
+	Long expected = 200L;
+	Account account = new Account(112L);
+	Account merged = null;
+	account.setId(332L);
+	em.getTransaction().begin();
+
+	merged = em.merge(account);
+	em.getTransaction().commit();
+	merged.setBalance(expected);
+
+	em.close();
+
+	assertEquals(expected, merged.getBalance());
+//	assertEquals (account, merged);
+    }
+    
+    @Test
+    public void test3() {
+	Long expected = 100L;
+	Account account = new Account(111L);
+	account.setId(331L);
+	Account merged = null;
+	em.getTransaction().begin();
+
+	merged = em.merge(account);
+	assertEquals(merged.getId(), account.getId());
+	em.getTransaction().commit();
+	assertTrue(merged.getId() != account.getId());
+//	assertFalse(em.contains(merged));
+	assertFalse(em.contains(account));
+
+	em.close();
+
+//	assertSame(merged, account);
+//	assertEquals(merged, account);
+    }
+
 }
