@@ -458,7 +458,7 @@ public class TestScript {
 	em.close();
 
 //	assertSame(merged, account);
-//	assertEquals(merged, account);
+	assertEquals(merged, account);
     }
 
 }
