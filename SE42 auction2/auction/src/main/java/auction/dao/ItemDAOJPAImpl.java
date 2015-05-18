@@ -1,6 +1,7 @@
 package auction.dao;
 
 import auction.domain.Item;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -31,7 +32,9 @@ public class ItemDAOJPAImpl implements ItemDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }        
@@ -49,7 +52,9 @@ public class ItemDAOJPAImpl implements ItemDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }        
@@ -65,7 +70,9 @@ public class ItemDAOJPAImpl implements ItemDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }        
@@ -83,7 +90,9 @@ public class ItemDAOJPAImpl implements ItemDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }
@@ -97,15 +106,19 @@ public class ItemDAOJPAImpl implements ItemDAO {
         em.getTransaction().begin();
         
         Query q = null;
-        List<Item> items = null;
+        List<Item> items = new ArrayList<Item>();
         
         try {
             q = em.createNamedQuery("Item.getAll");
-            items = (List<Item>) q.getResultList();
+            if (q.getResultList().size() > 0) { 
+                items = new ArrayList<Item>(q.getResultList());  
+            }
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }
@@ -119,16 +132,20 @@ public class ItemDAOJPAImpl implements ItemDAO {
         em.getTransaction().begin();
         
         Query q = null;
-        List<Item> items = null;
+        List<Item> items = new ArrayList<Item>();
         
         try {
             q = em.createNamedQuery("Item.findByDescription");
             q.setParameter("description", description);
-            items = (List<Item>) q.getResultList();
+            if (q.getResultList().size() > 0) { 
+                items = new ArrayList<Item>(q.getResultList()); 
+            }
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }
@@ -146,7 +163,9 @@ public class ItemDAOJPAImpl implements ItemDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }         

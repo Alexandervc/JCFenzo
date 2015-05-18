@@ -1,6 +1,7 @@
 package auction.dao;
 
 import auction.domain.User;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -27,7 +28,9 @@ public class UserDAOJPAImpl implements UserDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         } 
@@ -45,7 +48,9 @@ public class UserDAOJPAImpl implements UserDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }        
@@ -61,7 +66,9 @@ public class UserDAOJPAImpl implements UserDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }        
@@ -73,15 +80,19 @@ public class UserDAOJPAImpl implements UserDAO {
         em.getTransaction().begin();
         
         Query q = null;
-        List<User> users = null;
+        List<User> users = new ArrayList<User>();
         
         try {
             q = em.createNamedQuery("User.getAll");
-            users = (List<User>) q.getResultList();
+            if (q.getResultList().size() > 0) { 
+                users = new ArrayList<User>(q.getResultList()); 
+            }
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }
@@ -104,7 +115,9 @@ public class UserDAOJPAImpl implements UserDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }    
@@ -122,7 +135,9 @@ public class UserDAOJPAImpl implements UserDAO {
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-            em.getTransaction().rollback();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
         } finally {
             em.close();
         }         

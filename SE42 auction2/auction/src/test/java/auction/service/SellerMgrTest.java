@@ -13,7 +13,7 @@ import util.DatabaseCleaner;
 public class SellerMgrTest {
 
     private AuctionMgr auctionMgr;
-    private RegistrationMgr registrationMgr;
+    private JPARegistrationMgr registrationMgr;
     private SellerMgr sellerMgr;
     
     private EntityManagerFactory emf;
@@ -28,7 +28,7 @@ public class SellerMgrTest {
         DatabaseCleaner dbCleaner = new DatabaseCleaner(em);
         dbCleaner.clean();
         
-        registrationMgr = new RegistrationMgr();
+        registrationMgr = new JPARegistrationMgr();
         auctionMgr = new AuctionMgr();
         sellerMgr = new SellerMgr();
     }

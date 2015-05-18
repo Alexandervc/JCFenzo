@@ -14,10 +14,11 @@ public class Item implements Comparable {
     @GeneratedValue
     private Long id;
     
-    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     private User seller;
     
     @Embedded
+    @AttributeOverride (name = "description", column = @Column(name = "c_description"))
     private Category category;
     private String description;
     
