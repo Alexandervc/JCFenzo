@@ -2,6 +2,7 @@ package auction.domain;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -18,7 +19,7 @@ public class User {
     @Column(unique = true)
     private String email;
     
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "seller")
     private Set<Item> offeredItems;
 
     public User() {

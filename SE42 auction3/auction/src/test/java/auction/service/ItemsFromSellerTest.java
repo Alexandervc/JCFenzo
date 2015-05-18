@@ -35,7 +35,6 @@ public class ItemsFromSellerTest {
     }
 
     @Test
- //   @Ignore
     public void numberOfOfferedItems() {
         String email = "ifu1@nl";
         String omsch1 = "omsch_ifu1";
@@ -45,18 +44,17 @@ public class ItemsFromSellerTest {
         assertEquals(0, user1.numberOfOfferedItems());
 
         Category cat = new Category("cat2");
-        Item item1 = sellerMgr.offerItem(user1, cat, omsch1);
-       
-        // test number of items belonging to user1
-        assertEquals(0, user1.numberOfOfferedItems());
-        assertEquals(1, user1.numberOfOfferedItems());
+        Item item1 = sellerMgr.offerItem(user1, cat, omsch1);              
         
-        /*
-         *  expected: which one of te above two assertions do you expect to be true?
-         *  QUESTION:
-         *    Explain the result in terms of entity manager and persistance context.
+        /**
+         * QUESTION:
+         *      Explain the result in terms of entity manager and persistance context.
+         * EXPLANATION:
+         *      Item wordt aan de lijst van offeredItems toegevoegd.
          */
-         
+        
+        // test number of items belonging to user1
+        assertEquals(1, user1.numberOfOfferedItems());                  
          
         assertEquals(1, item1.getSeller().numberOfOfferedItems());
 
@@ -69,21 +67,29 @@ public class ItemsFromSellerTest {
         assertEquals(2, user3.numberOfOfferedItems());
 
         User userWithItem = item2.getSeller();
-        assertEquals(2, userWithItem.numberOfOfferedItems());
-        assertEquals(3, userWithItem.numberOfOfferedItems());
-        /*
-         *  expected: which one of te above two assertions do you expect to be true?
-         *  QUESTION:
-         *    Explain the result in terms of entity manager and persistance context.
+        
+        /**
+         * QUESTION:
+         *      Explain the result in terms of entity manager and persistance context.
+         * EXPLANATION:
+         *      Er is ondertussen maar 1 item toegevoegd.
+         */ 
+        assertEquals(2, userWithItem.numberOfOfferedItems());        
+               
+        /**
+         * QUESTION:
+         *      Explain the result in terms of entity manager and persistance context.
+         * EXPLANATION:
+         *      UserWithItem is gelijk aan user2, omdat user3 een ander object is,
+         *      omdat deze later uit de database opgehaald is. Hierdoor is de verwijzing
+         *      naar het object niet hetzelfde, maar de waardes van dit object wel.
          */
-        
-        
         assertNotSame(user3, userWithItem);
-        assertEquals(user3, userWithItem);
+        assertSame(user2, userWithItem);
+        assertEquals(user3.getId(), userWithItem.getId());
     }
 
     @Test
-//    @Ignore
     public void getItemsFromSeller() {
         String email = "ifu1@nl";
         String omsch1 = "omsch_ifu1";
@@ -104,9 +110,15 @@ public class ItemsFromSellerTest {
         it11.next();
         assertFalse(it11.hasNext());
 
-        // Explain difference in above two tests for te iterator of 'same' user
-
-        
+        /**
+         * QUESTION:
+         *      Explain difference in above two tests for the iterator of 'same' user
+         * EXPLANATION:
+         *      Er is 1 item aan offeredItems toegevoegd. Bij de eerste test wordt
+         *      er een item gevonden. Bij de tweede test haalt hij de user op uit
+         *      de database. Ook hier wordt een item gevonden. Dit betekent dat
+         *      de offeredItems dus ook worden weggeschreven in de database.
+         */        
         
         User user20 = registrationMgr.getUser(email);
         Item item20 = sellerMgr.offerItem(user20, cat, omsch2);

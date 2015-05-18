@@ -18,6 +18,10 @@ public class Bid {
     
     @Embedded
     private Money amount;
+    
+    @OneToOne(mappedBy = "highest")
+    private Item item;
+    
 
     public Bid() { }
     
@@ -37,5 +41,9 @@ public class Bid {
 
     public Money getAmount() {
         return amount;
+    }
+    
+    public void setItem(Item item) {
+        this.item = item;
     }
 }

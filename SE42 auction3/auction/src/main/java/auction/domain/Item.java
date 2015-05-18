@@ -23,7 +23,7 @@ public class Item implements Comparable {
     private Category category;
     private String description;
     
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Bid highest;
     
     public Item() { }
@@ -61,6 +61,7 @@ public class Item implements Comparable {
             return null;
         }
         highest = new Bid(buyer, amount);
+        highest.setItem(this);
         return highest;
     }
 
