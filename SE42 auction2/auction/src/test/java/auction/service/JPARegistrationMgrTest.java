@@ -11,10 +11,10 @@ import util.DatabaseCleaner;
 public class JPARegistrationMgrTest {
     
     private JPARegistrationMgr registrationMgr;
+    
     private EntityManagerFactory emf;
     
-    public JPARegistrationMgrTest() {
-        registrationMgr = new JPARegistrationMgr();
+    public JPARegistrationMgrTest() {        
         emf = Persistence.createEntityManagerFactory("auctionPU");
     }
 
@@ -23,6 +23,8 @@ public class JPARegistrationMgrTest {
         EntityManager em = emf.createEntityManager();
         DatabaseCleaner dbCleaner = new DatabaseCleaner(em);
         dbCleaner.clean();
+        
+        registrationMgr = new JPARegistrationMgr();
     }
 
     @Test

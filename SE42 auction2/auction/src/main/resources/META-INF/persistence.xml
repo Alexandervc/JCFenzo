@@ -3,12 +3,14 @@
   <persistence-unit name="auctionPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>auction.domain.User</class>
+    <class>auction.domain.Bid</class>
+    <class>auction.domain.Item</class>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/auctionse?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="root"/>
+      <property name="javax.persistence.jdbc.password" value="IJsje!123"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
       <property name="eclipselink.logging.logger" value="DefaultLogger"/>
       <property name="eclipselink.logging.level" value="FINE"/>

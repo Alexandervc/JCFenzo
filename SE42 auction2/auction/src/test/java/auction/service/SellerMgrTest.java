@@ -24,7 +24,7 @@ public class SellerMgrTest {
     private EntityManagerFactory emf;
     
     public SellerMgrTest() {
-        emf = Persistence.createEntityManagerFactory("autionPU");
+        emf = Persistence.createEntityManagerFactory("auctionPU");
     }
 
     @Before
@@ -32,6 +32,7 @@ public class SellerMgrTest {
         EntityManager em = emf.createEntityManager();
         DatabaseCleaner dbCleaner = new DatabaseCleaner(em);
         dbCleaner.clean();
+        
         registrationMgr = new RegistrationMgr();
         auctionMgr = new AuctionMgr();
         sellerMgr = new SellerMgr();
