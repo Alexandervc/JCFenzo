@@ -66,8 +66,9 @@ public class ItemDAOJPAImpl implements ItemDAO {
         em.getTransaction().begin();
         
         try {
+            em.persist(item.getHighestBid());
             em.merge(item);
-            em.getTransaction().commit();
+            em.getTransaction().commit();         
         } catch (Exception e) {
             e.printStackTrace();
             if (em.getTransaction().isActive()) {

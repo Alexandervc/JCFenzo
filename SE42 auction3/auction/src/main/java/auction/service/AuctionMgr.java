@@ -39,7 +39,11 @@ public class AuctionMgr  {
      *         amount niet hoger was dan het laatste bod, dan null
      */
     public Bid newBid(Item item, User buyer, Money amount) {
-        Bid bid = item.newBid(buyer, amount);
+        Bid bid = null;
+        
+        if (item != null) {
+            bid = item.newBid(buyer, amount);
+        }
         
         if(bid != null) {
             itemDAO.edit(item);

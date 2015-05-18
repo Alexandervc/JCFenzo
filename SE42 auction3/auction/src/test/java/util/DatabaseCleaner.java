@@ -9,8 +9,8 @@ public class DatabaseCleaner {
 
     private static final Class<?>[] ENTITY_TYPES = {
         Item.class,
-        Bid.class,
-        User.class
+        User.class,
+        Bid.class        
     };
     private final EntityManager em;
 

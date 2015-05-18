@@ -1,6 +1,5 @@
 package auction.service;
 
-import org.junit.Ignore;
 import javax.persistence.*;
 import util.DatabaseCleaner;
 import auction.domain.Category;
@@ -132,5 +131,5 @@ public class ItemsFromSellerTest {
         assertTrue(it30.hasNext());
         it30.next();
         assertTrue(it30.hasNext());
-    }
+    } 
 }

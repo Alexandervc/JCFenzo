@@ -19,16 +19,19 @@ public class Bid {
     @Embedded
     private Money amount;
     
-    @OneToOne(mappedBy = "highest")
-    private Item item;
-    
+    @OneToOne @JoinColumn(nullable = false)
+    private Item bidItem;    
 
     public Bid() { }
     
     public Bid(User buyer, Money amount) {
         this.buyer = buyer;
         this.amount = amount;
-        this.time = new FontysTime();
+        this.time = new FontysTime();    
+    }
+    
+    public Long getId() {
+        return id;
     }
 
     public FontysTime getTime() {
@@ -43,7 +46,11 @@ public class Bid {
         return amount;
     }
     
+    public Item getItem() {
+        return bidItem;
+    }
+    
     public void setItem(Item item) {
-        this.item = item;
+        this.bidItem = item;
     }
 }
