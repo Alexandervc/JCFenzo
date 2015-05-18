@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="3" failures="0" name="auction.service.AuctionMgrTest" time="10.232" errors="3" skipped="0">
+<testsuite tests="3" failures="0" name="auction.service.AuctionMgrTest" time="9.465" errors="3" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_20\jre\bin"/>
@@ -62,14 +62,14 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="auction.service.AuctionMgrTest" name="newBid" time="0.819">
+  <testcase classname="auction.service.AuctionMgrTest" name="newBid" time="0.777">
     <error message="
 Exception Description: No transaction is currently active" type="java.lang.IllegalStateException">java.lang.IllegalStateException: 
 Exception Description: No transaction is currently active
 	at org.eclipse.persistence.internal.jpa.transaction.EntityTransactionImpl.rollback(EntityTransactionImpl.java:176)
-	at auction.dao.ItemDAOJPAImpl.create(ItemDAOJPAImpl.java:57)
-	at auction.service.SellerMgr.offerItem(SellerMgr.java:26)
-	at auction.service.AuctionMgrTest.newBid(AuctionMgrTest.java:88)
+	at auction.dao.ItemDAOJPAImpl.create(ItemDAOJPAImpl.java:52)
+	at auction.service.SellerMgr.offerItem(SellerMgr.java:30)
+	at auction.service.AuctionMgrTest.newBid(AuctionMgrTest.java:84)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -101,92 +101,129 @@ Exception Description: No transaction is currently active
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </error>
-    <system-out>[EL Config]: metadata: 2015-05-18 11:17:10.748--ServerSession(1018298342)--Thread(Thread[main,5,main])--The access type for the persistent class [class auction.domain.Bid] is set to [FIELD].
-[EL Config]: metadata: 2015-05-18 11:17:10.785--ServerSession(1018298342)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field buyer] is being defaulted to: class auction.domain.User.
-[EL Config]: metadata: 2015-05-18 11:17:10.785--ServerSession(1018298342)--Thread(Thread[main,5,main])--The access type for the persistent class [class auction.domain.Item] is set to [FIELD].
-[EL Config]: metadata: 2015-05-18 11:17:10.785--ServerSession(1018298342)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field seller] is being defaulted to: class auction.domain.User.
-[EL Config]: metadata: 2015-05-18 11:17:10.786--ServerSession(1018298342)--Thread(Thread[main,5,main])--The target entity (reference) class for the one to one mapping element [field highest] is being defaulted to: class auction.domain.Bid.
-[EL Config]: metadata: 2015-05-18 11:17:10.789--ServerSession(1018298342)--Thread(Thread[main,5,main])--The access type for the persistent class [class auction.domain.User] is set to [FIELD].
-[EL Config]: metadata: 2015-05-18 11:17:10.789--ServerSession(1018298342)--Thread(Thread[main,5,main])--The access type for the persistent class [class nl.fontys.util.Money] is set to [FIELD].
-[EL Config]: metadata: 2015-05-18 11:17:10.79--ServerSession(1018298342)--Thread(Thread[main,5,main])--The access type for the persistent class [class nl.fontys.util.FontysTime] is set to [FIELD].
-[EL Config]: metadata: 2015-05-18 11:17:10.79--ServerSession(1018298342)--Thread(Thread[main,5,main])--The access type for the persistent class [class auction.domain.Category] is set to [FIELD].
-[EL Config]: metadata: 2015-05-18 11:17:10.791--ServerSession(1018298342)--Thread(Thread[main,5,main])--The alias name for the entity class [class auction.domain.Bid] is being defaulted to: Bid.
-[EL Config]: metadata: 2015-05-18 11:17:10.793--ServerSession(1018298342)--Thread(Thread[main,5,main])--The table name for entity [class auction.domain.Bid] is being defaulted to: BID.
-[EL Config]: metadata: 2015-05-18 11:17:10.814--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [cents] is being defaulted to: CENTS.
-[EL Config]: metadata: 2015-05-18 11:17:10.815--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [currency] is being defaulted to: CURRENCY.
-[EL Config]: metadata: 2015-05-18 11:17:10.816--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
-[EL Config]: metadata: 2015-05-18 11:17:10.816--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [seconds] is being defaulted to: SECONDS.
-[EL Config]: metadata: 2015-05-18 11:17:10.817--ServerSession(1018298342)--Thread(Thread[main,5,main])--The alias name for the entity class [class auction.domain.Item] is being defaulted to: Item.
-[EL Config]: metadata: 2015-05-18 11:17:10.817--ServerSession(1018298342)--Thread(Thread[main,5,main])--The table name for entity [class auction.domain.Item] is being defaulted to: ITEM.
-[EL Config]: metadata: 2015-05-18 11:17:10.819--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [description] is being defaulted to: DESCRIPTION.
-[EL Config]: metadata: 2015-05-18 11:17:10.819--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
-[EL Config]: metadata: 2015-05-18 11:17:10.82--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [description] is being defaulted to: DESCRIPTION.
-[EL Config]: metadata: 2015-05-18 11:17:10.82--ServerSession(1018298342)--Thread(Thread[main,5,main])--The alias name for the entity class [class auction.domain.User] is being defaulted to: User.
-[EL Config]: metadata: 2015-05-18 11:17:10.82--ServerSession(1018298342)--Thread(Thread[main,5,main])--The table name for entity [class auction.domain.User] is being defaulted to: USER.
-[EL Config]: metadata: 2015-05-18 11:17:10.82--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [Id] is being defaulted to: ID.
-[EL Config]: metadata: 2015-05-18 11:17:10.821--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [email] is being defaulted to: EMAIL.
-[EL Config]: metadata: 2015-05-18 11:17:10.834--ServerSession(1018298342)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field buyer] is being defaulted to: ID.
-[EL Config]: metadata: 2015-05-18 11:17:10.834--ServerSession(1018298342)--Thread(Thread[main,5,main])--The foreign key column name for the mapping element [buyer] is being defaulted to: BUYER_ID.
-[EL Config]: metadata: 2015-05-18 11:17:10.834--ServerSession(1018298342)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field seller] is being defaulted to: ID.
-[EL Config]: metadata: 2015-05-18 11:17:10.835--ServerSession(1018298342)--Thread(Thread[main,5,main])--The foreign key column name for the mapping element [seller] is being defaulted to: SELLER_ID.
-[EL Config]: metadata: 2015-05-18 11:17:10.835--ServerSession(1018298342)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field highest] is being defaulted to: ID.
-[EL Config]: metadata: 2015-05-18 11:17:10.835--ServerSession(1018298342)--Thread(Thread[main,5,main])--The foreign key column name for the mapping element [highest] is being defaulted to: HIGHEST_ID.
-[EL Info]: 2015-05-18 11:17:11.598--ServerSession(1018298342)--Thread(Thread[main,5,main])--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
-[EL Fine]: connection: 2015-05-18 11:17:11.878--Thread(Thread[main,5,main])--Detected database platform: org.eclipse.persistence.platform.database.MySQLPlatform
-[EL Config]: connection: 2015-05-18 11:17:11.89--ServerSession(1018298342)--Connection(1134011961)--Thread(Thread[main,5,main])--connecting(DatabaseLogin(
+    <system-out>[EL Config]: metadata: 2015-05-18 11:31:32.347--ServerSession(1018298342)--Thread(Thread[main,5,main])--The access type for the persistent class [class auction.domain.Bid] is set to [FIELD].
+[EL Config]: metadata: 2015-05-18 11:31:32.384--ServerSession(1018298342)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field buyer] is being defaulted to: class auction.domain.User.
+[EL Config]: metadata: 2015-05-18 11:31:32.385--ServerSession(1018298342)--Thread(Thread[main,5,main])--The access type for the persistent class [class auction.domain.Item] is set to [FIELD].
+[EL Config]: metadata: 2015-05-18 11:31:32.385--ServerSession(1018298342)--Thread(Thread[main,5,main])--The target entity (reference) class for the many to one mapping element [field seller] is being defaulted to: class auction.domain.User.
+[EL Config]: metadata: 2015-05-18 11:31:32.386--ServerSession(1018298342)--Thread(Thread[main,5,main])--The target entity (reference) class for the one to one mapping element [field highest] is being defaulted to: class auction.domain.Bid.
+[EL Config]: metadata: 2015-05-18 11:31:32.389--ServerSession(1018298342)--Thread(Thread[main,5,main])--The access type for the persistent class [class auction.domain.User] is set to [FIELD].
+[EL Config]: metadata: 2015-05-18 11:31:32.389--ServerSession(1018298342)--Thread(Thread[main,5,main])--The access type for the persistent class [class nl.fontys.util.Money] is set to [FIELD].
+[EL Config]: metadata: 2015-05-18 11:31:32.39--ServerSession(1018298342)--Thread(Thread[main,5,main])--The access type for the persistent class [class nl.fontys.util.FontysTime] is set to [FIELD].
+[EL Config]: metadata: 2015-05-18 11:31:32.391--ServerSession(1018298342)--Thread(Thread[main,5,main])--The access type for the persistent class [class auction.domain.Category] is set to [FIELD].
+[EL Config]: metadata: 2015-05-18 11:31:32.391--ServerSession(1018298342)--Thread(Thread[main,5,main])--The alias name for the entity class [class auction.domain.Bid] is being defaulted to: Bid.
+[EL Config]: metadata: 2015-05-18 11:31:32.393--ServerSession(1018298342)--Thread(Thread[main,5,main])--The table name for entity [class auction.domain.Bid] is being defaulted to: BID.
+[EL Config]: metadata: 2015-05-18 11:31:32.413--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [cents] is being defaulted to: CENTS.
+[EL Config]: metadata: 2015-05-18 11:31:32.415--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [currency] is being defaulted to: CURRENCY.
+[EL Config]: metadata: 2015-05-18 11:31:32.415--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: 2015-05-18 11:31:32.416--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [seconds] is being defaulted to: SECONDS.
+[EL Config]: metadata: 2015-05-18 11:31:32.416--ServerSession(1018298342)--Thread(Thread[main,5,main])--The alias name for the entity class [class auction.domain.Item] is being defaulted to: Item.
+[EL Config]: metadata: 2015-05-18 11:31:32.417--ServerSession(1018298342)--Thread(Thread[main,5,main])--The table name for entity [class auction.domain.Item] is being defaulted to: ITEM.
+[EL Config]: metadata: 2015-05-18 11:31:32.418--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [description] is being defaulted to: DESCRIPTION.
+[EL Config]: metadata: 2015-05-18 11:31:32.419--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [id] is being defaulted to: ID.
+[EL Config]: metadata: 2015-05-18 11:31:32.419--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [description] is being defaulted to: DESCRIPTION.
+[EL Config]: metadata: 2015-05-18 11:31:32.419--ServerSession(1018298342)--Thread(Thread[main,5,main])--The alias name for the entity class [class auction.domain.User] is being defaulted to: User.
+[EL Config]: metadata: 2015-05-18 11:31:32.42--ServerSession(1018298342)--Thread(Thread[main,5,main])--The table name for entity [class auction.domain.User] is being defaulted to: USER.
+[EL Config]: metadata: 2015-05-18 11:31:32.42--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [Id] is being defaulted to: ID.
+[EL Config]: metadata: 2015-05-18 11:31:32.42--ServerSession(1018298342)--Thread(Thread[main,5,main])--The column name for element [email] is being defaulted to: EMAIL.
+[EL Config]: metadata: 2015-05-18 11:31:32.434--ServerSession(1018298342)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field buyer] is being defaulted to: ID.
+[EL Config]: metadata: 2015-05-18 11:31:32.434--ServerSession(1018298342)--Thread(Thread[main,5,main])--The foreign key column name for the mapping element [buyer] is being defaulted to: BUYER_ID.
+[EL Config]: metadata: 2015-05-18 11:31:32.434--ServerSession(1018298342)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field seller] is being defaulted to: ID.
+[EL Config]: metadata: 2015-05-18 11:31:32.435--ServerSession(1018298342)--Thread(Thread[main,5,main])--The foreign key column name for the mapping element [seller] is being defaulted to: SELLER_ID.
+[EL Config]: metadata: 2015-05-18 11:31:32.435--ServerSession(1018298342)--Thread(Thread[main,5,main])--The primary key column name for the mapping element [field highest] is being defaulted to: ID.
+[EL Config]: metadata: 2015-05-18 11:31:32.435--ServerSession(1018298342)--Thread(Thread[main,5,main])--The foreign key column name for the mapping element [highest] is being defaulted to: HIGHEST_ID.
+[EL Info]: 2015-05-18 11:31:33.207--ServerSession(1018298342)--Thread(Thread[main,5,main])--EclipseLink, version: Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd
+[EL Fine]: connection: 2015-05-18 11:31:33.467--Thread(Thread[main,5,main])--Detected database platform: org.eclipse.persistence.platform.database.MySQLPlatform
+[EL Config]: connection: 2015-05-18 11:31:33.479--ServerSession(1018298342)--Connection(612635506)--Thread(Thread[main,5,main])--connecting(DatabaseLogin(
 	platform=&gt;MySQLPlatform
 	user name=&gt; &quot;root&quot;
 	datasource URL=&gt; &quot;jdbc:mysql://localhost:3306/auctionse?zeroDateTimeBehavior=convertToNull&quot;
 ))
-[EL Config]: connection: 2015-05-18 11:17:11.898--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--Connected: jdbc:mysql://localhost:3306/auctionse?zeroDateTimeBehavior=convertToNull
+[EL Config]: connection: 2015-05-18 11:31:33.486--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--Connected: jdbc:mysql://localhost:3306/auctionse?zeroDateTimeBehavior=convertToNull
 	User: root@localhost
 	Database: MySQL  Version: 5.6.16
 	Driver: MySQL Connector Java  Version: mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )
-[EL Info]: connection: 2015-05-18 11:17:12.051--ServerSession(1018298342)--Thread(Thread[main,5,main])--file:/C:/Users/Melanie/Documents/GitHub/JCFenzo/SE42 auction2/auction/target/classes/_auctionPU login successful
-[EL Fine]: sql: 2015-05-18 11:17:12.073--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--ALTER TABLE BID DROP FOREIGN KEY FK_BID_BUYER_ID
-[EL Fine]: sql: 2015-05-18 11:17:12.201--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--ALTER TABLE ITEM DROP FOREIGN KEY FK_ITEM_SELLER_ID
-[EL Fine]: sql: 2015-05-18 11:17:12.284--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--ALTER TABLE ITEM DROP FOREIGN KEY FK_ITEM_HIGHEST_ID
-[EL Fine]: sql: 2015-05-18 11:17:12.485--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--DROP TABLE USER
-[EL Fine]: sql: 2015-05-18 11:17:12.641--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--DROP TABLE BID
-[EL Fine]: sql: 2015-05-18 11:17:12.786--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--DROP TABLE ITEM
-[EL Fine]: sql: 2015-05-18 11:17:12.945--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--DELETE FROM SEQUENCE WHERE SEQ_NAME = SEQ_GEN
-[EL Fine]: sql: 2015-05-18 11:17:13.019--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--CREATE TABLE USER (ID BIGINT NOT NULL, EMAIL VARCHAR(255) UNIQUE, PRIMARY KEY (ID))
-[EL Fine]: sql: 2015-05-18 11:17:13.848--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--CREATE TABLE BID (ID BIGINT NOT NULL, CENTS BIGINT, CURRENCY VARCHAR(255), SECONDS BIGINT, BUYER_ID BIGINT, PRIMARY KEY (ID))
-[EL Fine]: sql: 2015-05-18 11:17:14.245--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--CREATE TABLE ITEM (ID BIGINT NOT NULL, DESCRIPTION VARCHAR(255), SELLER_ID BIGINT, HIGHEST_ID BIGINT, PRIMARY KEY (ID))
-[EL Fine]: sql: 2015-05-18 11:17:14.894--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--ALTER TABLE BID ADD CONSTRAINT FK_BID_BUYER_ID FOREIGN KEY (BUYER_ID) REFERENCES USER (ID)
-[EL Fine]: sql: 2015-05-18 11:17:16.356--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--ALTER TABLE ITEM ADD CONSTRAINT FK_ITEM_SELLER_ID FOREIGN KEY (SELLER_ID) REFERENCES USER (ID)
-[EL Fine]: sql: 2015-05-18 11:17:17.917--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--ALTER TABLE ITEM ADD CONSTRAINT FK_ITEM_HIGHEST_ID FOREIGN KEY (HIGHEST_ID) REFERENCES BID (ID)
-[EL Fine]: sql: 2015-05-18 11:17:19.341--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--SELECT * FROM SEQUENCE WHERE SEQ_NAME = SEQ_GEN
-[EL Fine]: sql: 2015-05-18 11:17:19.343--ServerSession(1018298342)--Connection(987834065)--Thread(Thread[main,5,main])--INSERT INTO SEQUENCE(SEQ_NAME, SEQ_COUNT) values (SEQ_GEN, 0)
-[EL Fine]: sql: 2015-05-18 11:17:19.514--ClientSession(1704979234)--Connection(987834065)--Thread(Thread[main,5,main])--DELETE FROM BID
-[EL Fine]: sql: 2015-05-18 11:17:19.518--ClientSession(1704979234)--Connection(987834065)--Thread(Thread[main,5,main])--DELETE FROM ITEM
-[EL Fine]: sql: 2015-05-18 11:17:19.52--ClientSession(1704979234)--Connection(987834065)--Thread(Thread[main,5,main])--DELETE FROM USER
-[EL Fine]: sql: 2015-05-18 11:17:19.559--ClientSession(705265015)--Connection(987834065)--Thread(Thread[main,5,main])--UPDATE SEQUENCE SET SEQ_COUNT = SEQ_COUNT + ? WHERE SEQ_NAME = ?
+[EL Info]: connection: 2015-05-18 11:31:33.633--ServerSession(1018298342)--Thread(Thread[main,5,main])--file:/C:/Users/Melanie/Documents/GitHub/JCFenzo/SE42 auction2/auction/target/classes/_auctionPU login successful
+[EL Fine]: sql: 2015-05-18 11:31:33.652--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--ALTER TABLE BID DROP FOREIGN KEY FK_BID_BUYER_ID
+[EL Fine]: sql: 2015-05-18 11:31:33.839--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--ALTER TABLE ITEM DROP FOREIGN KEY FK_ITEM_SELLER_ID
+[EL Fine]: sql: 2015-05-18 11:31:33.994--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--ALTER TABLE ITEM DROP FOREIGN KEY FK_ITEM_HIGHEST_ID
+[EL Fine]: sql: 2015-05-18 11:31:34.126--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--DROP TABLE USER
+[EL Fine]: sql: 2015-05-18 11:31:34.281--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--DROP TABLE BID
+[EL Fine]: sql: 2015-05-18 11:31:34.493--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--DROP TABLE ITEM
+[EL Fine]: sql: 2015-05-18 11:31:34.657--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--DELETE FROM SEQUENCE WHERE SEQ_NAME = SEQ_GEN
+[EL Fine]: sql: 2015-05-18 11:31:34.729--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--CREATE TABLE USER (ID BIGINT NOT NULL, EMAIL VARCHAR(255) UNIQUE, PRIMARY KEY (ID))
+[EL Fine]: sql: 2015-05-18 11:31:35.494--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--CREATE TABLE BID (ID BIGINT NOT NULL, CENTS BIGINT, CURRENCY VARCHAR(255), SECONDS BIGINT, BUYER_ID BIGINT, PRIMARY KEY (ID))
+[EL Fine]: sql: 2015-05-18 11:31:35.886--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--CREATE TABLE ITEM (ID BIGINT NOT NULL, DESCRIPTION VARCHAR(255), SELLER_ID BIGINT, HIGHEST_ID BIGINT, PRIMARY KEY (ID))
+[EL Fine]: sql: 2015-05-18 11:31:36.324--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--ALTER TABLE BID ADD CONSTRAINT FK_BID_BUYER_ID FOREIGN KEY (BUYER_ID) REFERENCES USER (ID)
+[EL Fine]: sql: 2015-05-18 11:31:37.446--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--ALTER TABLE ITEM ADD CONSTRAINT FK_ITEM_SELLER_ID FOREIGN KEY (SELLER_ID) REFERENCES USER (ID)
+[EL Fine]: sql: 2015-05-18 11:31:38.803--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--ALTER TABLE ITEM ADD CONSTRAINT FK_ITEM_HIGHEST_ID FOREIGN KEY (HIGHEST_ID) REFERENCES BID (ID)
+[EL Fine]: sql: 2015-05-18 11:31:40.126--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--SELECT * FROM SEQUENCE WHERE SEQ_NAME = SEQ_GEN
+[EL Fine]: sql: 2015-05-18 11:31:40.129--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--INSERT INTO SEQUENCE(SEQ_NAME, SEQ_COUNT) values (SEQ_GEN, 0)
+[EL Fine]: sql: 2015-05-18 11:31:40.364--ClientSession(879292014)--Connection(1185188034)--Thread(Thread[main,5,main])--DELETE FROM BID
+[EL Fine]: sql: 2015-05-18 11:31:40.37--ClientSession(879292014)--Connection(1185188034)--Thread(Thread[main,5,main])--DELETE FROM ITEM
+[EL Fine]: sql: 2015-05-18 11:31:40.373--ClientSession(879292014)--Connection(1185188034)--Thread(Thread[main,5,main])--DELETE FROM USER
+[EL Fine]: sql: 2015-05-18 11:31:40.469--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--SELECT ID, EMAIL FROM USER WHERE (EMAIL = ?)
+	bind =&gt; [ss2@nl]
+[EL Fine]: sql: 2015-05-18 11:31:40.485--ClientSession(666769352)--Connection(1185188034)--Thread(Thread[main,5,main])--UPDATE SEQUENCE SET SEQ_COUNT = SEQ_COUNT + ? WHERE SEQ_NAME = ?
 	bind =&gt; [50, SEQ_GEN]
-[EL Fine]: sql: 2015-05-18 11:17:19.56--ClientSession(705265015)--Connection(987834065)--Thread(Thread[main,5,main])--SELECT SEQ_COUNT FROM SEQUENCE WHERE SEQ_NAME = ?
+[EL Fine]: sql: 2015-05-18 11:31:40.487--ClientSession(666769352)--Connection(1185188034)--Thread(Thread[main,5,main])--SELECT SEQ_COUNT FROM SEQUENCE WHERE SEQ_NAME = ?
 	bind =&gt; [SEQ_GEN]
-[EL Fine]: sql: 2015-05-18 11:17:19.663--ClientSession(705265015)--Connection(987834065)--Thread(Thread[main,5,main])--INSERT INTO USER (ID, EMAIL) VALUES (?, ?)
-	bind =&gt; [2, ss2@nl]
-[EL Fine]: sql: 2015-05-18 11:17:19.667--ClientSession(705265015)--Connection(987834065)--Thread(Thread[main,5,main])--INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
-	bind =&gt; [1, omsch_bb, omsch_bb, 2, null]
-[EL Fine]: sql: 2015-05-18 11:17:19.67--ClientSession(705265015)--Thread(Thread[main,5,main])--SELECT 1
-[EL Warning]: 2015-05-18 11:17:19.672--UnitOfWork(2099348779)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+[EL Fine]: sql: 2015-05-18 11:31:40.554--ClientSession(666769352)--Connection(1185188034)--Thread(Thread[main,5,main])--INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
+	bind =&gt; [1, omsch_bb, omsch_bb, null, null]
+[EL Fine]: sql: 2015-05-18 11:31:40.556--ClientSession(666769352)--Thread(Thread[main,5,main])--SELECT 1
+[EL Warning]: 2015-05-18 11:31:40.557--UnitOfWork(1238047663)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
 Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Column &apos;DESCRIPTION&apos; specified twice
 Error Code: 1110
 Call: INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
-	bind =&gt; [1, omsch_bb, omsch_bb, 2, null]
+	bind =&gt; [1, omsch_bb, omsch_bb, null, null]
 Query: InsertObjectQuery(auction.domain.Item@0)
 </system-out>
-    <system-err>javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+    <system-err>javax.persistence.NoResultException: getSingleResult() did not retrieve any entities.
+	at org.eclipse.persistence.internal.jpa.QueryImpl.throwNoResultException(QueryImpl.java:972)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getSingleResult(QueryImpl.java:522)
+	at org.eclipse.persistence.internal.jpa.EJBQueryImpl.getSingleResult(EJBQueryImpl.java:400)
+	at auction.dao.UserDAOJPAImpl.findByEmail(UserDAOJPAImpl.java:103)
+	at auction.service.SellerMgr.offerItem(SellerMgr.java:29)
+	at auction.service.AuctionMgrTest.newBid(AuctionMgrTest.java:84)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
 Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Column &apos;DESCRIPTION&apos; specified twice
 Error Code: 1110
 Call: INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
-	bind =&gt; [1, omsch_bb, omsch_bb, 2, null]
+	bind =&gt; [1, omsch_bb, omsch_bb, null, null]
 Query: InsertObjectQuery(auction.domain.Item@0)
 	at org.eclipse.persistence.internal.jpa.transaction.EntityTransactionImpl.commit(EntityTransactionImpl.java:157)
-	at auction.dao.ItemDAOJPAImpl.create(ItemDAOJPAImpl.java:54)
-	at auction.service.SellerMgr.offerItem(SellerMgr.java:26)
-	at auction.service.AuctionMgrTest.newBid(AuctionMgrTest.java:88)
+	at auction.dao.ItemDAOJPAImpl.create(ItemDAOJPAImpl.java:49)
+	at auction.service.SellerMgr.offerItem(SellerMgr.java:30)
+	at auction.service.AuctionMgrTest.newBid(AuctionMgrTest.java:84)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -221,7 +258,7 @@ Caused by: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v2
 Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Column &apos;DESCRIPTION&apos; specified twice
 Error Code: 1110
 Call: INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
-	bind =&gt; [1, omsch_bb, omsch_bb, 2, null]
+	bind =&gt; [1, omsch_bb, omsch_bb, null, null]
 Query: InsertObjectQuery(auction.domain.Item@0)
 	at org.eclipse.persistence.exceptions.DatabaseException.sqlException(DatabaseException.java:331)
 	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeDirectNoSelect(DatabaseAccessor.java:900)
@@ -249,8 +286,7 @@ Query: InsertObjectQuery(auction.domain.Item@0)
 	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
 	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1737)
 	at org.eclipse.persistence.internal.sessions.CommitManager.commitNewObjectsForClassWithChangeSet(CommitManager.java:226)
-	at org.eclipse.persistence.internal.sessions.CommitManager.commitAllObjectsForClassWithChangeSet(CommitManager.java:193)
-	at org.eclipse.persistence.internal.sessions.CommitManager.commitAllObjectsWithChangeSet(CommitManager.java:138)
+	at org.eclipse.persistence.internal.sessions.CommitManager.commitAllObjectsWithChangeSet(CommitManager.java:125)
 	at org.eclipse.persistence.internal.sessions.AbstractSession.writeAllObjectsWithChangeSet(AbstractSession.java:4207)
 	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.commitToDatabase(UnitOfWorkImpl.java:1441)
 	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.commitToDatabaseWithChangeSet(UnitOfWorkImpl.java:1531)
@@ -276,17 +312,17 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Column &ap
 	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2081)
 	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2066)
 	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeDirectNoSelect(DatabaseAccessor.java:890)
-	... 65 more
+	... 64 more
 </system-err>
   </testcase>
-  <testcase classname="auction.service.AuctionMgrTest" name="getItem" time="0.012">
+  <testcase classname="auction.service.AuctionMgrTest" name="getItem" time="0.009">
     <error message="
 Exception Description: No transaction is currently active" type="java.lang.IllegalStateException">java.lang.IllegalStateException: 
 Exception Description: No transaction is currently active
 	at org.eclipse.persistence.internal.jpa.transaction.EntityTransactionImpl.rollback(EntityTransactionImpl.java:176)
-	at auction.dao.ItemDAOJPAImpl.create(ItemDAOJPAImpl.java:57)
-	at auction.service.SellerMgr.offerItem(SellerMgr.java:26)
-	at auction.service.AuctionMgrTest.getItem(AuctionMgrTest.java:48)
+	at auction.dao.ItemDAOJPAImpl.create(ItemDAOJPAImpl.java:52)
+	at auction.service.SellerMgr.offerItem(SellerMgr.java:30)
+	at auction.service.AuctionMgrTest.getItem(AuctionMgrTest.java:45)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -318,31 +354,68 @@ Exception Description: No transaction is currently active
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </error>
-    <system-out>[EL Fine]: sql: 2015-05-18 11:17:19.784--ClientSession(623224248)--Connection(987834065)--Thread(Thread[main,5,main])--DELETE FROM BID
-[EL Fine]: sql: 2015-05-18 11:17:19.785--ClientSession(623224248)--Connection(987834065)--Thread(Thread[main,5,main])--DELETE FROM ITEM
-[EL Fine]: sql: 2015-05-18 11:17:19.786--ClientSession(623224248)--Connection(987834065)--Thread(Thread[main,5,main])--DELETE FROM USER
-[EL Fine]: sql: 2015-05-18 11:17:19.788--ClientSession(785340693)--Connection(987834065)--Thread(Thread[main,5,main])--INSERT INTO USER (ID, EMAIL) VALUES (?, ?)
-	bind =&gt; [4, xx2@nl]
-[EL Fine]: sql: 2015-05-18 11:17:19.789--ClientSession(785340693)--Connection(987834065)--Thread(Thread[main,5,main])--INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
-	bind =&gt; [3, omsch, omsch, 4, null]
-[EL Fine]: sql: 2015-05-18 11:17:19.791--ClientSession(785340693)--Thread(Thread[main,5,main])--SELECT 1
-[EL Warning]: 2015-05-18 11:17:19.791--UnitOfWork(915540950)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+    <system-out>[EL Fine]: sql: 2015-05-18 11:31:40.639--ClientSession(785340693)--Connection(1185188034)--Thread(Thread[main,5,main])--DELETE FROM BID
+[EL Fine]: sql: 2015-05-18 11:31:40.641--ClientSession(785340693)--Connection(1185188034)--Thread(Thread[main,5,main])--DELETE FROM ITEM
+[EL Fine]: sql: 2015-05-18 11:31:40.644--ClientSession(785340693)--Connection(1185188034)--Thread(Thread[main,5,main])--DELETE FROM USER
+[EL Fine]: sql: 2015-05-18 11:31:40.647--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--SELECT ID, EMAIL FROM USER WHERE (EMAIL = ?)
+	bind =&gt; [xx2@nl]
+[EL Fine]: sql: 2015-05-18 11:31:40.652--ClientSession(1494158416)--Connection(1185188034)--Thread(Thread[main,5,main])--INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
+	bind =&gt; [2, omsch, omsch, null, null]
+[EL Fine]: sql: 2015-05-18 11:31:40.654--ClientSession(1494158416)--Thread(Thread[main,5,main])--SELECT 1
+[EL Warning]: 2015-05-18 11:31:40.654--UnitOfWork(2096598149)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
 Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Column &apos;DESCRIPTION&apos; specified twice
 Error Code: 1110
 Call: INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
-	bind =&gt; [3, omsch, omsch, 4, null]
+	bind =&gt; [2, omsch, omsch, null, null]
 Query: InsertObjectQuery(auction.domain.Item@0)
 </system-out>
-    <system-err>javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+    <system-err>javax.persistence.NoResultException: getSingleResult() did not retrieve any entities.
+	at org.eclipse.persistence.internal.jpa.QueryImpl.throwNoResultException(QueryImpl.java:972)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getSingleResult(QueryImpl.java:522)
+	at org.eclipse.persistence.internal.jpa.EJBQueryImpl.getSingleResult(EJBQueryImpl.java:400)
+	at auction.dao.UserDAOJPAImpl.findByEmail(UserDAOJPAImpl.java:103)
+	at auction.service.SellerMgr.offerItem(SellerMgr.java:29)
+	at auction.service.AuctionMgrTest.getItem(AuctionMgrTest.java:45)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
 Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Column &apos;DESCRIPTION&apos; specified twice
 Error Code: 1110
 Call: INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
-	bind =&gt; [3, omsch, omsch, 4, null]
+	bind =&gt; [2, omsch, omsch, null, null]
 Query: InsertObjectQuery(auction.domain.Item@0)
 	at org.eclipse.persistence.internal.jpa.transaction.EntityTransactionImpl.commit(EntityTransactionImpl.java:157)
-	at auction.dao.ItemDAOJPAImpl.create(ItemDAOJPAImpl.java:54)
-	at auction.service.SellerMgr.offerItem(SellerMgr.java:26)
-	at auction.service.AuctionMgrTest.getItem(AuctionMgrTest.java:48)
+	at auction.dao.ItemDAOJPAImpl.create(ItemDAOJPAImpl.java:49)
+	at auction.service.SellerMgr.offerItem(SellerMgr.java:30)
+	at auction.service.AuctionMgrTest.getItem(AuctionMgrTest.java:45)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -377,7 +450,7 @@ Caused by: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v2
 Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Column &apos;DESCRIPTION&apos; specified twice
 Error Code: 1110
 Call: INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
-	bind =&gt; [3, omsch, omsch, 4, null]
+	bind =&gt; [2, omsch, omsch, null, null]
 Query: InsertObjectQuery(auction.domain.Item@0)
 	at org.eclipse.persistence.exceptions.DatabaseException.sqlException(DatabaseException.java:331)
 	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeDirectNoSelect(DatabaseAccessor.java:900)
@@ -405,8 +478,7 @@ Query: InsertObjectQuery(auction.domain.Item@0)
 	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
 	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1737)
 	at org.eclipse.persistence.internal.sessions.CommitManager.commitNewObjectsForClassWithChangeSet(CommitManager.java:226)
-	at org.eclipse.persistence.internal.sessions.CommitManager.commitAllObjectsForClassWithChangeSet(CommitManager.java:193)
-	at org.eclipse.persistence.internal.sessions.CommitManager.commitAllObjectsWithChangeSet(CommitManager.java:138)
+	at org.eclipse.persistence.internal.sessions.CommitManager.commitAllObjectsWithChangeSet(CommitManager.java:125)
 	at org.eclipse.persistence.internal.sessions.AbstractSession.writeAllObjectsWithChangeSet(AbstractSession.java:4207)
 	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.commitToDatabase(UnitOfWorkImpl.java:1441)
 	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.commitToDatabaseWithChangeSet(UnitOfWorkImpl.java:1531)
@@ -432,17 +504,17 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Column &ap
 	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2081)
 	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2066)
 	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeDirectNoSelect(DatabaseAccessor.java:890)
-	... 65 more
+	... 64 more
 </system-err>
   </testcase>
-  <testcase classname="auction.service.AuctionMgrTest" name="findItemByDescription" time="0.008">
+  <testcase classname="auction.service.AuctionMgrTest" name="findItemByDescription" time="0.012">
     <error message="
 Exception Description: No transaction is currently active" type="java.lang.IllegalStateException">java.lang.IllegalStateException: 
 Exception Description: No transaction is currently active
 	at org.eclipse.persistence.internal.jpa.transaction.EntityTransactionImpl.rollback(EntityTransactionImpl.java:176)
-	at auction.dao.ItemDAOJPAImpl.create(ItemDAOJPAImpl.java:57)
-	at auction.service.SellerMgr.offerItem(SellerMgr.java:26)
-	at auction.service.AuctionMgrTest.findItemByDescription(AuctionMgrTest.java:64)
+	at auction.dao.ItemDAOJPAImpl.create(ItemDAOJPAImpl.java:52)
+	at auction.service.SellerMgr.offerItem(SellerMgr.java:30)
+	at auction.service.AuctionMgrTest.findItemByDescription(AuctionMgrTest.java:61)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -474,31 +546,68 @@ Exception Description: No transaction is currently active
 	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
 </error>
-    <system-out>[EL Fine]: sql: 2015-05-18 11:17:20.206--ClientSession(814300680)--Connection(987834065)--Thread(Thread[main,5,main])--DELETE FROM BID
-[EL Fine]: sql: 2015-05-18 11:17:20.207--ClientSession(814300680)--Connection(987834065)--Thread(Thread[main,5,main])--DELETE FROM ITEM
-[EL Fine]: sql: 2015-05-18 11:17:20.207--ClientSession(814300680)--Connection(987834065)--Thread(Thread[main,5,main])--DELETE FROM USER
-[EL Fine]: sql: 2015-05-18 11:17:20.209--ClientSession(1498259207)--Connection(987834065)--Thread(Thread[main,5,main])--INSERT INTO USER (ID, EMAIL) VALUES (?, ?)
-	bind =&gt; [6, xx3@nl]
-[EL Fine]: sql: 2015-05-18 11:17:20.21--ClientSession(1498259207)--Connection(987834065)--Thread(Thread[main,5,main])--INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
-	bind =&gt; [5, omsch, omsch, 6, null]
-[EL Fine]: sql: 2015-05-18 11:17:20.211--ClientSession(1498259207)--Thread(Thread[main,5,main])--SELECT 1
-[EL Warning]: 2015-05-18 11:17:20.212--UnitOfWork(1864074564)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+    <system-out>[EL Fine]: sql: 2015-05-18 11:31:40.699--ClientSession(974587617)--Connection(1185188034)--Thread(Thread[main,5,main])--DELETE FROM BID
+[EL Fine]: sql: 2015-05-18 11:31:40.7--ClientSession(974587617)--Connection(1185188034)--Thread(Thread[main,5,main])--DELETE FROM ITEM
+[EL Fine]: sql: 2015-05-18 11:31:40.703--ClientSession(974587617)--Connection(1185188034)--Thread(Thread[main,5,main])--DELETE FROM USER
+[EL Fine]: sql: 2015-05-18 11:31:40.705--ServerSession(1018298342)--Connection(1185188034)--Thread(Thread[main,5,main])--SELECT ID, EMAIL FROM USER WHERE (EMAIL = ?)
+	bind =&gt; [xx3@nl]
+[EL Fine]: sql: 2015-05-18 11:31:40.709--ClientSession(166710672)--Connection(1185188034)--Thread(Thread[main,5,main])--INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
+	bind =&gt; [3, omsch, omsch, null, null]
+[EL Fine]: sql: 2015-05-18 11:31:40.711--ClientSession(166710672)--Thread(Thread[main,5,main])--SELECT 1
+[EL Warning]: 2015-05-18 11:31:40.711--UnitOfWork(180084736)--Thread(Thread[main,5,main])--Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
 Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Column &apos;DESCRIPTION&apos; specified twice
 Error Code: 1110
 Call: INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
-	bind =&gt; [5, omsch, omsch, 6, null]
+	bind =&gt; [3, omsch, omsch, null, null]
 Query: InsertObjectQuery(auction.domain.Item@0)
 </system-out>
-    <system-err>javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
+    <system-err>javax.persistence.NoResultException: getSingleResult() did not retrieve any entities.
+	at org.eclipse.persistence.internal.jpa.QueryImpl.throwNoResultException(QueryImpl.java:972)
+	at org.eclipse.persistence.internal.jpa.QueryImpl.getSingleResult(QueryImpl.java:522)
+	at org.eclipse.persistence.internal.jpa.EJBQueryImpl.getSingleResult(EJBQueryImpl.java:400)
+	at auction.dao.UserDAOJPAImpl.findByEmail(UserDAOJPAImpl.java:103)
+	at auction.service.SellerMgr.offerItem(SellerMgr.java:29)
+	at auction.service.AuctionMgrTest.findItemByDescription(AuctionMgrTest.java:61)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+javax.persistence.RollbackException: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v20140319-9ad6abd): org.eclipse.persistence.exceptions.DatabaseException
 Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Column &apos;DESCRIPTION&apos; specified twice
 Error Code: 1110
 Call: INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
-	bind =&gt; [5, omsch, omsch, 6, null]
+	bind =&gt; [3, omsch, omsch, null, null]
 Query: InsertObjectQuery(auction.domain.Item@0)
 	at org.eclipse.persistence.internal.jpa.transaction.EntityTransactionImpl.commit(EntityTransactionImpl.java:157)
-	at auction.dao.ItemDAOJPAImpl.create(ItemDAOJPAImpl.java:54)
-	at auction.service.SellerMgr.offerItem(SellerMgr.java:26)
-	at auction.service.AuctionMgrTest.findItemByDescription(AuctionMgrTest.java:64)
+	at auction.dao.ItemDAOJPAImpl.create(ItemDAOJPAImpl.java:49)
+	at auction.service.SellerMgr.offerItem(SellerMgr.java:30)
+	at auction.service.AuctionMgrTest.findItemByDescription(AuctionMgrTest.java:61)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -533,7 +642,7 @@ Caused by: Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.5.2.v2
 Internal Exception: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Column &apos;DESCRIPTION&apos; specified twice
 Error Code: 1110
 Call: INSERT INTO ITEM (ID, DESCRIPTION, DESCRIPTION, SELLER_ID, HIGHEST_ID) VALUES (?, ?, ?, ?, ?)
-	bind =&gt; [5, omsch, omsch, 6, null]
+	bind =&gt; [3, omsch, omsch, null, null]
 Query: InsertObjectQuery(auction.domain.Item@0)
 	at org.eclipse.persistence.exceptions.DatabaseException.sqlException(DatabaseException.java:331)
 	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeDirectNoSelect(DatabaseAccessor.java:900)
@@ -561,8 +670,7 @@ Query: InsertObjectQuery(auction.domain.Item@0)
 	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1786)
 	at org.eclipse.persistence.internal.sessions.AbstractSession.executeQuery(AbstractSession.java:1737)
 	at org.eclipse.persistence.internal.sessions.CommitManager.commitNewObjectsForClassWithChangeSet(CommitManager.java:226)
-	at org.eclipse.persistence.internal.sessions.CommitManager.commitAllObjectsForClassWithChangeSet(CommitManager.java:193)
-	at org.eclipse.persistence.internal.sessions.CommitManager.commitAllObjectsWithChangeSet(CommitManager.java:138)
+	at org.eclipse.persistence.internal.sessions.CommitManager.commitAllObjectsWithChangeSet(CommitManager.java:125)
 	at org.eclipse.persistence.internal.sessions.AbstractSession.writeAllObjectsWithChangeSet(AbstractSession.java:4207)
 	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.commitToDatabase(UnitOfWorkImpl.java:1441)
 	at org.eclipse.persistence.internal.sessions.UnitOfWorkImpl.commitToDatabaseWithChangeSet(UnitOfWorkImpl.java:1531)
@@ -588,7 +696,7 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Column &ap
 	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2081)
 	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2066)
 	at org.eclipse.persistence.internal.databaseaccess.DatabaseAccessor.executeDirectNoSelect(DatabaseAccessor.java:890)
-	... 65 more
+	... 64 more
 </system-err>
   </testcase>
 </testsuite>

@@ -14,7 +14,7 @@ public class Item implements Comparable {
     @GeneratedValue
     private Long id;
     
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private User seller;
     
     @Embedded
