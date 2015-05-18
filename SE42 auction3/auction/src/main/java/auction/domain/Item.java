@@ -1,5 +1,6 @@
 package auction.domain;
 
+import java.util.Objects;
 import javax.persistence.*;
 import nl.fontys.util.Money;
 
@@ -31,6 +32,8 @@ public class Item implements Comparable {
         this.seller = seller;
         this.category = category;
         this.description = description;
+        
+        this.seller.addItem(this);
     }
 
     public Long getId() {
@@ -63,19 +66,21 @@ public class Item implements Comparable {
 
     @Override
     public int compareTo(Object arg0) {
-        //TODO
-        return -1;
+        return Long.compare(this.id, ((Item)arg0).getId());
     }
 
     @Override
     public boolean equals(Object o) {
-        //TODO
+        if (this.id.equals(((Item)o).getId())) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public int hashCode() {
-        //TODO
-        return 0;
+        int hash = 5;
+        hash = 41 * hash + Objects.hashCode(this.id);
+        return hash;
     }
 }

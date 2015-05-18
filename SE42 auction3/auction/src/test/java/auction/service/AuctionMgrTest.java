@@ -66,7 +66,6 @@ public class AuctionMgrTest {
 
         res = (ArrayList<Item>) auctionMgr.findItemByDescription(omsch);
         assertEquals(2, res.size());
-
     }
 
     @Test

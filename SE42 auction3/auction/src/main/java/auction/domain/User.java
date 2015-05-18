@@ -1,5 +1,7 @@
 package auction.domain;
 
+import java.util.Iterator;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,9 @@ public class User {
     private Long Id;
     @Column(unique = true)
     private String email;
+    
+    @OneToMany(mappedBy = "item")
+    private Set<Item> offeredItems;
 
     public User() {
     }
@@ -29,5 +34,17 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+    
+    public Iterator<Item> getOfferedItems() {
+        return offeredItems.iterator();
+    }
+    
+    public void addItem(Item item) {
+        offeredItems.add(item);
+    }
+    
+    public int numberOfOfferedItems() {
+        return offeredItems.size();
     }
 }

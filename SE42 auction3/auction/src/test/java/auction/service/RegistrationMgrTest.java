@@ -47,7 +47,6 @@ public class RegistrationMgrTest {
         assertEquals(1, users.size());
         assertSame(users.get(0), user1);
 
-
         User user2 = registrationMgr.registerUser("xxx9@yyy");
         users = registrationMgr.getUsers();
         assertEquals(2, users.size());
