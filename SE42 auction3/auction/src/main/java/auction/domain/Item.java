@@ -71,7 +71,7 @@ public class Item implements Comparable {
 
     @Override
     public boolean equals(Object o) {
-        if (this.id.equals(((Item)o).getId())) {
+        if (this.id != null && this.id.equals(((Item)o).getId())) {
             return true;
         }
         return false;
