@@ -12,24 +12,55 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class FurnitureAndPaintingTest {
-
-    final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionPU");
-    final EntityManager em = emf.createEntityManager();
     private AuctionMgr auctionMgr;
-    private RegistrationMgr registrationMgr;
+    private JPARegistrationMgr registrationMgr;
     private SellerMgr sellerMgr;
-
+    
+    private EntityManagerFactory emf;
+    
     public FurnitureAndPaintingTest() {
+        emf = Persistence.createEntityManagerFactory("auctionPU");
     }
 
     @Before
     public void setUp() throws Exception {
-        registrationMgr = new RegistrationMgr();
+        EntityManager em = emf.createEntityManager();
+        DatabaseCleaner dbCleaner = new DatabaseCleaner(em);
+        dbCleaner.clean();
+        
+        registrationMgr = new JPARegistrationMgr();
         auctionMgr = new AuctionMgr();
         sellerMgr = new SellerMgr();
-        new DatabaseCleaner(em).clean();
     }
 
+    /**
+     * Niet abstract:
+     *  Zonder gekozen strategy voor de overerving:
+     *      Alles wordt samen weggeschreven in de tabel Item met een discriminator DTYPE
+     *      Zelfde effect als InheritanceType.SINGLE_TABLE
+     * 
+     *  InheritanceType.JOINED:
+     *      Specifieke eigenschappen worden weggeschreven in Painting/Furniture
+     *      Algemene eigenschappen worden weggeschreven in Item, daarbij bevat item
+     *      een discriminator DTYPE en de rows in de tabellen zijn gekoppeld via id
+     * 
+     *  InheritanceType.TABLE_PER_CLASS:
+     *      Voor iedere klasse is er een eigen tabel waarin de gegevens worden opgeslagen
+     *      Bijv Furniture bevat ook de eigenschappen van Item
+     * 
+     * Item abstract:
+     *  InheritanceType.SINGLE_TABLE:
+     *      Alles wordt nog op dezelfde manier weggeschreven
+     * 
+     *  InheritanceType.JOINED:
+     *      Alles wordt nog op dezelfde manier weggeschreven
+     * 
+     *  InheritanceType.TABLE_PER_CLASS:
+     *      Furniture en Painting worden nog steeds in een aparte tabel weggeschreven
+     *      Voor Item wordt wel een tabel aangemaakt met alleen een lege kolom: seller_id
+     * 
+     * 
+     */
     @Test
     public void newFurniture() {
         String omsch = "omsch1";
@@ -71,7 +102,8 @@ public class FurnitureAndPaintingTest {
 
         Item foundFurniture = auctionMgr.getItem(furniture1.getId());
         int i = 3;
-        assertEquals(foundFurniture.getHighestBid(), bid);
+        // Zelfde id, betekent hetzelfde
+        assertEquals(foundFurniture.getHighestBid().getId(), bid.getId());
         assertTrue(foundFurniture.getClass() == Furniture.class);
     }
 }

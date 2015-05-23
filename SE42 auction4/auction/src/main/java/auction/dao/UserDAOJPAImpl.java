@@ -24,6 +24,7 @@ public class UserDAOJPAImpl implements UserDAO {
         
         try {
             q = em.createNamedQuery("User.count");
+            
             i = (int)q.getSingleResult();
             em.getTransaction().commit();
         } catch (Exception e) {
