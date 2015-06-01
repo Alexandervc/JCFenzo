@@ -1,0 +1,8 @@
+#surefire
+#Mon Jun 01 19:22:00 CEST 2015
+maven.ext.class.path=C\:\\Program Files\\NetBeans 8.0.1\\java\\maven-nblib\\netbeans-eventspy.jar
+user.dir=C\:\\Users\\Alexander\\Documents\\GitHub\\JCFenzo\\AuctionClient
+file.encoding=UTF-8
+localRepository=C\:\\Users\\Alexander\\.m2\\repository
+basedir=C\:\\Users\\Alexander\\Documents\\GitHub\\JCFenzo\\AuctionClient
+test=test.JPARegistrationMgrTest
