@@ -31,27 +31,6 @@ public interface Auction {
      * @param arg1
      * @param arg0
      * @return
-     *     returns auction.web.Item
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "offerItem", targetNamespace = "http://web.auction/", className = "auction.web.OfferItem")
-    @ResponseWrapper(localName = "offerItemResponse", targetNamespace = "http://web.auction/", className = "auction.web.OfferItemResponse")
-    @Action(input = "http://web.auction/Auction/offerItemRequest", output = "http://web.auction/Auction/offerItemResponse")
-    public Item offerItem(
-        @WebParam(name = "arg0", targetNamespace = "")
-        User arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        Category arg1,
-        @WebParam(name = "arg2", targetNamespace = "")
-        String arg2);
-
-    /**
-     * 
-     * @param arg2
-     * @param arg1
-     * @param arg0
-     * @return
      *     returns auction.web.Bid
      */
     @WebMethod
@@ -81,6 +60,27 @@ public interface Auction {
     public Item getItem(
         @WebParam(name = "arg0", targetNamespace = "")
         Long arg0);
+
+    /**
+     * 
+     * @param arg2
+     * @param arg1
+     * @param arg0
+     * @return
+     *     returns auction.web.Item
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "offerItem", targetNamespace = "http://web.auction/", className = "auction.web.OfferItem")
+    @ResponseWrapper(localName = "offerItemResponse", targetNamespace = "http://web.auction/", className = "auction.web.OfferItemResponse")
+    @Action(input = "http://web.auction/Auction/offerItemRequest", output = "http://web.auction/Auction/offerItemResponse")
+    public Item offerItem(
+        @WebParam(name = "arg0", targetNamespace = "")
+        User arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        Category arg1,
+        @WebParam(name = "arg2", targetNamespace = "")
+        String arg2);
 
     /**
      * 

@@ -16,17 +16,17 @@
 <message name="registerUserResponse">
 <part name="parameters" element="tns:registerUserResponse"></part>
 </message>
-<message name="getUsers">
-<part name="parameters" element="tns:getUsers"></part>
-</message>
-<message name="getUsersResponse">
-<part name="parameters" element="tns:getUsersResponse"></part>
-</message>
 <message name="cleanDB">
 <part name="parameters" element="tns:cleanDB"></part>
 </message>
 <message name="cleanDBResponse">
 <part name="parameters" element="tns:cleanDBResponse"></part>
+</message>
+<message name="getUsers">
+<part name="parameters" element="tns:getUsers"></part>
+</message>
+<message name="getUsersResponse">
+<part name="parameters" element="tns:getUsersResponse"></part>
 </message>
 <portType name="Registration">
 <operation name="getUser">
@@ -37,13 +37,13 @@
 <input wsam:Action="http://web.auction/Registration/registerUserRequest" message="tns:registerUser"></input>
 <output wsam:Action="http://web.auction/Registration/registerUserResponse" message="tns:registerUserResponse"></output>
 </operation>
-<operation name="getUsers">
-<input wsam:Action="http://web.auction/Registration/getUsersRequest" message="tns:getUsers"></input>
-<output wsam:Action="http://web.auction/Registration/getUsersResponse" message="tns:getUsersResponse"></output>
-</operation>
 <operation name="cleanDB">
 <input wsam:Action="http://web.auction/Registration/cleanDBRequest" message="tns:cleanDB"></input>
 <output wsam:Action="http://web.auction/Registration/cleanDBResponse" message="tns:cleanDBResponse"></output>
+</operation>
+<operation name="getUsers">
+<input wsam:Action="http://web.auction/Registration/getUsersRequest" message="tns:getUsers"></input>
+<output wsam:Action="http://web.auction/Registration/getUsersResponse" message="tns:getUsersResponse"></output>
 </operation>
 </portType>
 <binding name="RegistrationPortBinding" type="tns:Registration">
@@ -66,7 +66,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="getUsers">
+<operation name="cleanDB">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -75,7 +75,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="cleanDB">
+<operation name="getUsers">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>

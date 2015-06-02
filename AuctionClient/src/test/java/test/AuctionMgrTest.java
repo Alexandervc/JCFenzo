@@ -81,8 +81,10 @@ public class AuctionMgrTest {
         assertEquals(emailb, new1.getBuyer().getEmail());
 
         // lager bod
-        money.setCents(9);
-        Bid new2 = auctionMgr.newBid(item1, buyer2, money);
+        Money money2 = new Money();
+        money2.setCurrency("eur");
+        money2.setCents(9);
+        Bid new2 = auctionMgr.newBid(item1, buyer2, money2);
         assertNull(new2);
 
         // hoger bod

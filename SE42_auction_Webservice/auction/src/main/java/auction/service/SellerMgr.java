@@ -33,8 +33,10 @@ public class SellerMgr {
      *         false als er al geboden was op het item.
      */
     public boolean revokeItem(Item item) {
-        if (item.getHighestBid() == null) {
-            itemDAO.remove(item);
+        Item item2 = itemDAO.find(item.getId());
+        
+        if (item2.getHighestBid() == null) {
+            itemDAO.remove(item2);
             return true;
         }
         

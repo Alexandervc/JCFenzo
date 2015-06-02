@@ -9,8 +9,6 @@ import auction.domain.*;
 import auction.service.*;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,7 +21,7 @@ import nl.fontys.util.DatabaseCleaner;
  */
 @WebService
 public class Registration {
-    private RegistrationMgr registrationMgr = new RegistrationMgr();
+    private JPARegistrationMgr registrationMgr = new JPARegistrationMgr();
     
     public User registerUser(String email) {
         return registrationMgr.registerUser(email);

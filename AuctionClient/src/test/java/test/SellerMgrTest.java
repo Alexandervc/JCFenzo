@@ -3,8 +3,6 @@ package test;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import javax.persistence.*;
-import util.DatabaseCleaner;
 import auction.web.*;
 import service.*;
 

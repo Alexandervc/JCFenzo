@@ -57,6 +57,15 @@ public interface Registration {
 
     /**
      * 
+     */
+    @WebMethod
+    @RequestWrapper(localName = "cleanDB", targetNamespace = "http://web.auction/", className = "auction.web.CleanDB")
+    @ResponseWrapper(localName = "cleanDBResponse", targetNamespace = "http://web.auction/", className = "auction.web.CleanDBResponse")
+    @Action(input = "http://web.auction/Registration/cleanDBRequest", output = "http://web.auction/Registration/cleanDBResponse")
+    public void cleanDB();
+
+    /**
+     * 
      * @return
      *     returns java.util.List<auction.web.User>
      */
@@ -66,14 +75,5 @@ public interface Registration {
     @ResponseWrapper(localName = "getUsersResponse", targetNamespace = "http://web.auction/", className = "auction.web.GetUsersResponse")
     @Action(input = "http://web.auction/Registration/getUsersRequest", output = "http://web.auction/Registration/getUsersResponse")
     public List<User> getUsers();
-
-    /**
-     * 
-     */
-    @WebMethod
-    @RequestWrapper(localName = "cleanDB", targetNamespace = "http://web.auction/", className = "auction.web.CleanDB")
-    @ResponseWrapper(localName = "cleanDBResponse", targetNamespace = "http://web.auction/", className = "auction.web.CleanDBResponse")
-    @Action(input = "http://web.auction/Registration/cleanDBRequest", output = "http://web.auction/Registration/cleanDBResponse")
-    public void cleanDB();
 
 }

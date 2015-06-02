@@ -1,0 +1,12 @@
+#surefire
+#Tue Jun 02 09:47:55 CEST 2015
+jpda.address=13683
+maven.ext.class.path=C\:\\Program Files\\NetBeans 8.0.1\\java\\maven-nblib\\netbeans-eventspy.jar
+file.encoding=UTF-8
+jpda.listen=true
+forkMode=once
+user.dir=C\:\\Users\\Alexander\\Documents\\GitHub\\JCFenzo\\AuctionClient
+localRepository=C\:\\Users\\Alexander\\.m2\\repository
+test=test.AuctionMgrTest
+basedir=C\:\\Users\\Alexander\\Documents\\GitHub\\JCFenzo\\AuctionClient
+maven.surefire.debug=-Xdebug -Xrunjdwp\:transport\=dt_socket,server\=n,address\=13683
