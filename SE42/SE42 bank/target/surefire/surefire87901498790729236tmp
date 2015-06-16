@@ -1,0 +1,34 @@
+#surefire
+#Sun May 03 16:17:35 CEST 2015
+testClassesDirectory=C\:\\Users\\Melanie\\Documents\\GitHub\\JCFenzo\\SE42 bank\\target\\test-classes
+classPathUrl.4=C\:\\Users\\Melanie\\.m2\\repository\\org\\eclipse\\persistence\\eclipselink\\2.6.0\\eclipselink-2.6.0.jar
+forkMode=once
+classPathUrl.3=C\:\\Users\\Melanie\\.m2\\repository\\org\\hamcrest\\hamcrest-core\\1.3\\hamcrest-core-1.3.jar
+classPathUrl.2=C\:\\Users\\Melanie\\.m2\\repository\\junit\\junit\\4.11\\junit-4.11.jar
+useManifestOnlyJar=true
+classPathUrl.1=C\:\\Users\\Melanie\\Documents\\GitHub\\JCFenzo\\SE42 bank\\target\\classes
+reportsDirectory=C\:\\Users\\Melanie\\Documents\\GitHub\\JCFenzo\\SE42 bank\\target\\surefire-reports
+classPathUrl.0=C\:\\Users\\Melanie\\Documents\\GitHub\\JCFenzo\\SE42 bank\\target\\test-classes
+providerConfiguration=org.apache.maven.surefire.junit4.JUnit4Provider
+testSuiteDefinitionTestSourceDirectory=C\:\\Users\\Melanie\\Documents\\GitHub\\JCFenzo\\SE42 bank\\src\\test\\java
+requestedTest=util.TestScript
+surefireClassPathUrl.1=C\:\\Users\\Melanie\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-api\\2.10\\surefire-api-2.10.jar
+surefireClassPathUrl.0=C\:\\Users\\Melanie\\.m2\\repository\\org\\apache\\maven\\surefire\\surefire-junit4\\2.10\\surefire-junit4-2.10.jar
+runOrder=filesystem
+useSystemClassLoader=true
+isTrimStackTrace=true
+classPathUrl.15=C\:\\Users\\Melanie\\.m2\\repository\\mysql\\mysql-connector-java\\5.1.35\\mysql-connector-java-5.1.35.jar
+enableAssertions=true
+classPathUrl.14=C\:\\Users\\Melanie\\.m2\\repository\\org\\eclipse\\persistence\\org.eclipse.persistence.jpa.jpql\\2.5.0-SNAPSHOT\\org.eclipse.persistence.jpa.jpql-2.5.0-SNAPSHOT.jar
+failIfNoTests=true
+classPathUrl.13=C\:\\Users\\Melanie\\.m2\\repository\\org\\eclipse\\persistence\\org.eclipse.persistence.antlr\\2.5.0-SNAPSHOT\\org.eclipse.persistence.antlr-2.5.0-SNAPSHOT.jar
+includes0=**/util/TestScript.java
+classPathUrl.12=C\:\\Users\\Melanie\\.m2\\repository\\org\\eclipse\\persistence\\org.eclipse.persistence.jpa\\2.5.0-SNAPSHOT\\org.eclipse.persistence.jpa-2.5.0-SNAPSHOT.jar
+classPathUrl.11=C\:\\Users\\Melanie\\.m2\\repository\\org\\eclipse\\persistence\\org.eclipse.persistence.asm\\2.5.0-SNAPSHOT\\org.eclipse.persistence.asm-2.5.0-SNAPSHOT.jar
+classPathUrl.10=C\:\\Users\\Melanie\\.m2\\repository\\org\\eclipse\\persistence\\org.eclipse.persistence.core\\2.5.0-SNAPSHOT\\org.eclipse.persistence.core-2.5.0-SNAPSHOT.jar
+classPathUrl.9=C\:\\Users\\Melanie\\.m2\\repository\\org\\eclipse\\persistence\\org.eclipse.persistence.jpa.modelgen.processor\\2.5.0-SNAPSHOT\\org.eclipse.persistence.jpa.modelgen.processor-2.5.0-SNAPSHOT.jar
+classPathUrl.8=C\:\\Users\\Melanie\\.m2\\repository\\org\\glassfish\\javax.json\\1.0.4\\javax.json-1.0.4.jar
+classPathUrl.7=C\:\\Users\\Melanie\\.m2\\repository\\javax\\validation\\validation-api\\1.1.0.Final\\validation-api-1.1.0.Final.jar
+childDelegation=false
+classPathUrl.6=C\:\\Users\\Melanie\\.m2\\repository\\org\\eclipse\\persistence\\commonj.sdo\\2.1.1\\commonj.sdo-2.1.1.jar
+classPathUrl.5=C\:\\Users\\Melanie\\.m2\\repository\\org\\eclipse\\persistence\\javax.persistence\\2.1.0\\javax.persistence-2.1.0.jar
