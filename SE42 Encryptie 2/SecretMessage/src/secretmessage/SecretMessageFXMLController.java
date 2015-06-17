@@ -47,7 +47,7 @@ public class SecretMessageFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         fileChooser = new FileChooser();
-        ExtensionFilter filter = new ExtensionFilter("*.txt", "*.txt");
+        ExtensionFilter filter = new ExtensionFilter("*.ext", "*.ext");
         fileChooser.getExtensionFilters().add(filter);
     }    
     
@@ -61,6 +61,8 @@ public class SecretMessageFXMLController implements Initializable {
         try {            
             // Iteration count
             int count = 1000;
+            
+            System.out.println("salt = " + salt);
             
             // Create PBE parameter set
             PBEParameterSpec pbeParamSpec = new PBEParameterSpec(salt, count);
@@ -89,11 +91,20 @@ public class SecretMessageFXMLController implements Initializable {
             // Create PBE Cipher
             Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
             
+            System.out.println("mode = " + mode);
+            System.out.println("pbeKey = " + pbeKey.toString());
+            System.out.println("pbeParamSpec = " + pbeParamSpec.toString());
+            
             // Initialize PBE Cipher with key and parameters
             pbeCipher.init(mode, pbeKey, pbeParamSpec);
             
+            System.out.println("text = " + cleartext);
+            
             // Crypt the cleartext
             ciphertext = pbeCipher.doFinal(cleartext);
+            
+            System.out.println("ciphertext = " + ciphertext);
+            
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException ex) {
             ex.printStackTrace();
         }
