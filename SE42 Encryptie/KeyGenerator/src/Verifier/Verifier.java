@@ -75,15 +75,7 @@ public class Verifier {
             } else {
                 System.out.println("Handtekening niet goedgekeurd");
             }
-        } catch (IOException ex) {
-            Logger.getLogger(Verifier.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Verifier.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeySpecException ex) {
-            Logger.getLogger(Verifier.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeyException ex) {
-            Logger.getLogger(Verifier.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SignatureException ex) {
+        } catch (IOException | NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException | SignatureException ex) {
             Logger.getLogger(Verifier.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

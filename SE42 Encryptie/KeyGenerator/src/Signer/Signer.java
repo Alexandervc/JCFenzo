@@ -57,15 +57,7 @@ public class Signer {
             out2.write(message);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Signer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SignatureException ex) {
-            Logger.getLogger(Signer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Signer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeySpecException ex) {
-            Logger.getLogger(Signer.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidKeyException ex) {
+        } catch (NoSuchAlgorithmException | SignatureException | IOException | InvalidKeySpecException | InvalidKeyException ex) {
             Logger.getLogger(Signer.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
