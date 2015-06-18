@@ -41,7 +41,7 @@ public class Verifier {
             // Handtekening en bericht ophalen
             FileInputStream in = new FileInputStream("input(signedByMellex).ext");
             DataInputStream in2 = new DataInputStream(in);
-            int messageSize = in2.available();
+            int messageSize = (int) in.getChannel().size();
             
             int length = in2.readInt();
             messageSize -= 4;

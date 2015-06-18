@@ -55,14 +55,12 @@ public class SecretMessageFXMLController implements Initializable {
         this.stage = stage;
     }
     
-    private byte[] crypt(int mode, byte[] cleartext, byte[] salt) {
+    private byte[] crypt(int mode, byte[] message, byte[] salt) {
         byte[] ciphertext = null;
         
         try {            
             // Iteration count
             int count = 1000;
-            
-            System.out.println("salt = " + salt);
             
             // Create PBE parameter set
             PBEParameterSpec pbeParamSpec = new PBEParameterSpec(salt, count);
@@ -91,22 +89,16 @@ public class SecretMessageFXMLController implements Initializable {
             // Create PBE Cipher
             Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
             
-            System.out.println("mode = " + mode);
-            System.out.println("pbeKey = " + pbeKey.toString());
-            System.out.println("pbeParamSpec = " + pbeParamSpec.toString());
-            
             // Initialize PBE Cipher with key and parameters
             pbeCipher.init(mode, pbeKey, pbeParamSpec);
             
-            System.out.println("text = " + cleartext);
+            // Crypt the message
+            ciphertext = pbeCipher.doFinal(message);
             
-            // Crypt the cleartext
-            ciphertext = pbeCipher.doFinal(cleartext);
-            
-            System.out.println("ciphertext = " + ciphertext);
-            
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException ex) {
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException ex) {
             ex.printStackTrace();
+        } catch (BadPaddingException ex) {
+            throw new IllegalArgumentException("U heeft het verkeerde wachtwoord ingevuld");
         }
         
         return ciphertext;
@@ -171,8 +163,8 @@ public class SecretMessageFXMLController implements Initializable {
             DataInputStream in2 = new DataInputStream(in);
             
             byte[] salt = new byte[saltLength];
-            byte[] message = new byte[in2.available() - saltLength];
-            for(int i = 0; i < in2.available(); i++) {
+            byte[] message = new byte[(int) file.length() - saltLength];
+            for(int i = 0; i < file.length(); i++) {
                 if(i < saltLength) {
                     salt[i] = in2.readByte();
                 } else {
