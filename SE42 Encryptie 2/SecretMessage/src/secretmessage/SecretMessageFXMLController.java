@@ -70,6 +70,7 @@ public class SecretMessageFXMLController implements Initializable {
             // factory.
             // Haal wachtwoord op
             CharSequence passwordSequence = pfPassword.getCharacters();
+            pfPassword.clear();
             char[] password = new char[passwordSequence.length()];
             for(int i = 0; i < passwordSequence.length(); i++) {
                 password[i] = passwordSequence.charAt(i);
